@@ -1,5 +1,5 @@
 CC = arm-rpizw-g++
-CCFLAGS = -ggdb -I. 
+CCFLAGS = -ggdb -I.
 LFLAGS = -lbcm2835 
 SOURCES = main.cpp mcp3202.cpp
 DEPS = mcp3202.h

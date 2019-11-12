@@ -24,7 +24,7 @@ void MCP3202::initADC()
 	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);
 	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_65536);
 	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
-	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);
+	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW); 
 
 }
 
