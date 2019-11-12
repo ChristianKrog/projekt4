@@ -41,14 +41,14 @@ int main(void)
  
         ch0.spiWriteRead(dataCH0, sizeof(dataCH0) );
         
-        ch0Val = 0;
+        /*ch0Val = 0;
         ch0Val = (dataCH0[0] & 0x07) << 9;
         ch0Val |= (dataCH0[1] & 0xFF) << 1;
         ch0Val |= (dataCH0[2] & 0x80) >> 7;
-        ch0Val |= ch0Val & 0xFFF;
-        /*ch0Val = 0;
-        ch0Val = (dataCH0[1]<< 8) & 0b1100000000; //merge data[1] & data[2] to get result
-        ch0Val |=  (dataCH0[2] & 0xff); */
+        ch0Val |= ch0Val & 0xFFF;*/
+        ch0Val = 0;
+        ch0Val = (dataCH0[1]<< 8) & 0b111100000000; //merge data[1] & data[2] to get result
+        ch0Val |=  (dataCH0[2] & 0xff); 
 
         ///////////////////////////////////CHANNEL 1//////////////////////////////////////////////////
         dataCH1[0] = 1;  //  first byte transmitted -> start bit
@@ -57,14 +57,15 @@ int main(void)
 
         ch1.spiWriteRead(dataCH1, sizeof(dataCH1) );
 
-        ch1Val = 0;
+        /*ch1Val = 0;
         ch1Val = (dataCH1[0] & 0x07) << 9;
         ch1Val |= (dataCH1[1] & 0xFF) << 1;
         ch1Val |= (dataCH1[2] & 0x80) >> 7;
-        ch1Val |= ch1Val & 0xFFF;
-        /*ch1Val = 0;
-        ch1Val = (dataCH1[1]<< 8) & 0b1100000000; //merge data[1] & data[2] to get result
-        ch1Val |=  (dataCH1[2] & 0xff); */
+        ch1Val |= ch1Val & 0xFFF;*/
+
+        ch1Val = 0;
+        ch1Val = (dataCH1[1]<< 8) & 0b111100000000; //merge data[1] & data[2] to get result
+        ch1Val |=  (dataCH1[2] & 0xff); 
         
         sleep(1);
         cout << "The Result is - Ch0 = " << ch0Val << " | Ch1 = " << ch1Val << endl;
@@ -72,5 +73,4 @@ int main(void)
     }
     return 0;
 }
-
 
