@@ -6,15 +6,20 @@ using namespace std;
 char tx[10] = { 0xF0, 0x00 }, rx[10] = { 0 };
 
 int main()
-{
+{	/*
 	if (!bcm2835_init()) 
 	{
 		cout << "error (spi_init())" << endl;
-	}
+	}*/
+	
+	/*
 	if (!bcm2835_spi_begin()) 
 	{
 		cout << "error (spi_begin())" << endl;
-	}
+	} */
+
+	bcm2835_spi_begin()
+
 	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);
 	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);
 	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_65536);

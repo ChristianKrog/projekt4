@@ -1,4 +1,4 @@
-CC = arm-rpizw-g++ 
+CC = g++ 
 CCFLAGS = -ggdb -I. 
 LFLAGS = -lbcm2835
 SOURCES = test.cpp
