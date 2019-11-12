@@ -11,7 +11,7 @@ MCP3202::MCP3202(int channel)
 }
 
 void MCP3202::initADC()
-{
+{	
 	if (!bcm2835_init()) 
 	{
 		cout << "error (spi_init())" << endl;
@@ -25,7 +25,6 @@ void MCP3202::initADC()
 	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_65536);
 	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
 	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW); 
-
 }
 
 int MCP3202::readADC()
