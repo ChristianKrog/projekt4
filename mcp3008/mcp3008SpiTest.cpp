@@ -67,7 +67,7 @@ int main(void)
         ch1Val = (dataCH1[1]<< 8) & 0b111100000000; //merge data[1] & data[2] to get result
         ch1Val |=  (dataCH1[2] & 0xff); 
         
-        sleep(1);
+        usleep(100);
         cout << "The Result is - Ch0 = " << ch0Val << " | Ch1 = " << ch1Val << endl;
         
     }
