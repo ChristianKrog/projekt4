@@ -1,4 +1,6 @@
 #include "mcp3008Spi.h"
+#include <cstring>
+
 using namespace std;
 /**********************************************************
  * spiOpen() :function is called by the constructor.
@@ -77,6 +79,7 @@ int mcp3008Spi::spiClose(){
 int mcp3008Spi::spiWriteRead( unsigned char *data, int length){
  
   struct spi_ioc_transfer spi[length];
+  memset(&spi, 0, sizeof(spi));
   int i = 0; 
   int retVal = -1;  
  
