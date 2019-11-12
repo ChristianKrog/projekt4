@@ -1,6 +1,6 @@
 CC = arm-rpizw-g++ 
-CCFLAGS = -ggdb -I. -lpthread
-LFLAGS = -lpthread
+CCFLAGS = -ggdb -I. 
+LFLAGS = -lbcm2835
 SOURCES = test.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = exe
