@@ -25,26 +25,38 @@ using namespace std;
  
 int main(void)
 {
-    mcp3008Spi a2d("/dev/spidev0.0", SPI_MODE_0, 1000000, 8);
-    int i = 20;
-        int a2dVal = 0; 
-    int a2dChannel = 0;
-        unsigned char data[3];
+    mcp3008Spi ch0("/dev/spidev0.0", SPI_MODE_0, 1000000, 8);
+    mcp3008Spi ch1("/dev/spidev0.0", SPI_MODE_0, 1000000, 8);
+    int ch0Val = 0; 
+    int ch1Val = 0;
+    unsigned char dataCH0[3];
+    unsigned char dataCH1[3];
  
-    while(i > 0)
+    while(1)
     {
-        data[0] = 1;  //  first byte transmitted -> start bit
-        data[1] = 0b10000000 |( ((a2dChannel & 7) << 4)); // second byte transmitted -> (SGL/DIF = 1, D2=D1=D0=0)
-        data[2] = 0; // third byte transmitted....don't care
+        dataCH0[0] = 1;  //  first byte transmitted -> start bit
+        dataCH0[1] = 0b10100000; // Use channel 0. 
+        dataCH0[2] = 0; // third byte transmitted....don't care
  
-        a2d.spiWriteRead(data, sizeof(data) );
- 
-        a2dVal = 0;
-                a2dVal = (data[1]<< 8) & 0b1100000000; //merge data[1] & data[2] to get result
-                a2dVal |=  (data[2] & 0xff);
+        ch0.spiWriteRead(dataCH0, sizeof(dataCH0) );
+        
+        ch0Val = 0;
+        ch0Val = (dataCH0[1]<< 8) & 0b1100000000; //merge data[1] & data[2] to get result
+        ch0Val |=  (dataCH0[2] & 0xff);
+
+        dataCH1[0] = 1;  //  first byte transmitted -> start bit
+        dataCH1[1] = 0b11100000; // Use channel 1. 
+        dataCH1[2] = 0; // third byte transmitted....don't care
+
+        ch1.spiWriteRead(dataCH1, sizeof(dataCH1) );
+
+        ch1Val = 0;
+        ch1Val = (dataCH1[1]<< 8) & 0b1100000000; //merge data[1] & data[2] to get result
+        ch1Val |=  (dataCH1[2] & 0xff);
         sleep(1);
-        cout << "The Result is: " << a2dVal << endl;
-        i--;
+        cout << "The Result is - Channel0 = " << ch0Val << " | Channel1 = " << ch1Val << endl;
+        
     }
     return 0;
 }
+
