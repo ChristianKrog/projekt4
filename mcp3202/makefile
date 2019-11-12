@@ -1,6 +1,6 @@
-CC = arm-rpizw-g++
+CC = g++
 CCFLAGS = -ggdb -I.
-LFLAGS = -lbcm2835 
+LFLAGS = -l bcm2835 
 SOURCES = main.cpp mcp3202.cpp
 DEPS = mcp3202.h
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -13,7 +13,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) -o $(EXECUTABLE) -o $@ $^ $(LFLAGS)
 
 %.o: %.cpp $(DEPS)
-	$(CC) -c -o $@ $^ $(CCFLAGS)
+    $(CC) -c -o $@ $< $(CCFLAGS)
 
 .PHONY: clean
 clean: ##Remove files made by makefile
