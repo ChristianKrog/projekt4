@@ -69,7 +69,7 @@ int Controlunit::readADC(int channel)
 	resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
 	resultMoist |= (data[2] & 0xff);
 
-	return retVal;
+	return resultMoist;
 }
 
 void Controlunit::printADC()
