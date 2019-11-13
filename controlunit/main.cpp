@@ -8,6 +8,7 @@ int main()
 
 	while (1)
 	{
+		wiringPiSetup();
 		//m.printMoist();
 		//usleep(100);
 		temp = t.getTemp(); 
