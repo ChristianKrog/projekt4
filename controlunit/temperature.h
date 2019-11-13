@@ -20,6 +20,6 @@ public:
 	void stopHeater();
 private: 
 	int temp_;
-	int pinDHT_ = 3;
+	int pinDHT_ = 11;//GPIO 17
 	void initDHT();
 };

@@ -47,14 +47,24 @@ int Temperature::getTemp()
 			j++;
 		}
 	}
+
 	float c = (float)(((data[2] & 0x7F) << 8) + data[3]) / 10;
-	c = data[2];	
+	if ( c > 125 )
+	{
+		c = data[2];	// for DHT11
+	}
+	
+	if ( data[2] & 0x80 )
+	{
+		c = -c;
+	}	
 	
 	return c;
 }
 
 void Temperature::initDHT()
 {	
+	wiringPiSetup();
 	//pull pin down for 18 milliseconds 
 	pinMode(pinDHT_, OUTPUT);
 	digitalWrite(pinDHT_, LOW);
