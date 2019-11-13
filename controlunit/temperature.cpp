@@ -26,7 +26,7 @@ int Temperature::getTemp()
 		while (digitalRead(pinDHT_) == laststate)
 		{
 			counter++;
-			delayMicroseconds(1);
+			usleep(1);
 			if (counter == 255)
 			{
 				break;
@@ -58,7 +58,7 @@ void Temperature::initDHT()
 	//pull pin down for 18 milliseconds 
 	pinMode(pinDHT_, OUTPUT);
 	digitalWrite(pinDHT_, LOW);
-	delay(18);
+	usleep(18);
 
 	/* prepare to read the pin */
 	pinMode(pinDHT_, INPUT);
