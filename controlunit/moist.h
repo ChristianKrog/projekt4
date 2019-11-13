@@ -3,7 +3,7 @@
 #define MOIST_H
 #include "controlunit.h"
 //Check which libraries are necesarry
-
+/*
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -15,6 +15,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+*/
 
 
 

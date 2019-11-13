@@ -1,12 +1,12 @@
 #pragma once
 
-//#include "temperature.h"
-//#include "database.h"
+
 
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
-//#include "moist.h"
+#include "temperature.h"
+//#include "database.h"
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>
