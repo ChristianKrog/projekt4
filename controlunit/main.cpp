@@ -12,6 +12,7 @@ int main()
 		//usleep(100);
 		temp = t.getTemp(); 
 		cout << temp << endl;
+		
 	}
 
 	return 0;

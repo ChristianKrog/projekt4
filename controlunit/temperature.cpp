@@ -48,11 +48,13 @@ int Temperature::getTemp()
 		}
 	}
 
+	float h = (float)((data[0] << 8) + data[1]) / 10;
+		if ( h > 100 )
+		{
+			h = data[0];	
+		}
+
 	float c = (float)(((data[2] & 0x7F) << 8) + data[3]) / 10;
-	if ( c > 125 )
-	{
-		c = data[2];	// for DHT11
-	}
 	
 	if ( data[2] & 0x80 )
 	{
