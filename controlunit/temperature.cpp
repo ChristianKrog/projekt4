@@ -12,6 +12,7 @@ Temperature::~Temperature()
 
 int Temperature::getTemp()
 {
+	int MAX_TIMINGS = 85
 	uint8_t laststate = HIGH;
 	uint8_t counter = 0;
 	uint8_t j = 0, i;
@@ -22,7 +23,7 @@ int Temperature::getTemp()
 	for (i = 0; i < MAX_TIMINGS; i++)
 	{
 		counter = 0;
-		while (digitalRead(DHT_PIN) == laststate)
+		while (digitalRead(pinDHT) == laststate)
 		{
 			counter++;
 			delayMicroseconds(1);
@@ -31,7 +32,7 @@ int Temperature::getTemp()
 				break;
 			}
 		}
-		laststate = digitalRead(DHT_PIN);
+		laststate = digitalRead(pinDHT);
 
 		if (counter == 255)
 			break;
@@ -47,14 +48,14 @@ int Temperature::getTemp()
 		}
 	}
 	float c = (float)(((data[2] & 0x7F) << 8) + data[3]) / 10;
-	c = data[2];	// for DHT11
+	c = data[2];	
 	
 	return c;
 }
 
 void Temperature::initDHT()
 {	
-	int pinDHT //set PIN RPI
+	int pinDHT = 3;//set PIN RPI
 
 	//pull pin down for 18 milliseconds 
 	pinMode(pinDHT, OUTPUT);
