@@ -19,5 +19,6 @@ public:
 	void stopHeater();
 private: 
 	int temp_;
+	int pinDHT_ = 3
 	void initDHT();
 };
