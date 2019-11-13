@@ -5,8 +5,8 @@ using namespace std;
 class Moist
 {
 public: 
-	int getMoist(); 
-	void setMoist(); 
+	int getMoist(int ); 
+	void setMoist(int ); 
 	void startPump();
 	void stopPump();
 	void openValve(int );
@@ -14,4 +14,8 @@ public:
 	bool rainwaterLevel();
 	void selectWaterSupply();
 private: 
+	int moist_;
+	int sensorID_; 
+	int valveID_; 
+	bool waterLevel
 }
