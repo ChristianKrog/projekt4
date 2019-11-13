@@ -3,7 +3,7 @@
 int main()
 {
 	Controlunit c; 
-	int ch0, ch1; 
+
 	while (1)
 	{
 		c.printADC();

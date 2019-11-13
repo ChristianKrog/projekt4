@@ -1,5 +1,5 @@
 #include "controlunit.h"
-
+#include <cstring>
 
 Controlunit::Controlunit()
 {
