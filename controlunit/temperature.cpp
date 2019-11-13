@@ -12,7 +12,7 @@ Temperature::~Temperature()
 
 int Temperature::getTemp()
 {
-	int MAX_TIMINGS = 85
+	int MAX_TIMINGS = 85;
 	uint8_t laststate = HIGH;
 	uint8_t counter = 0;
 	uint8_t j = 0, i;
