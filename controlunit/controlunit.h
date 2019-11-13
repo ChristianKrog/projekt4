@@ -1,5 +1,5 @@
 #pragma once
-//#include "moist.h"
+#include "moist.h"
 //#include "temperature.h"
 //#include "database.h"
 
@@ -22,14 +22,16 @@ class Controlunit
 public:
 	Controlunit();
 	~Controlunit();
-	int readADC(int );
-	void printADC(); 
-	
-private:
-	unsigned char mode_;
+	//int readADC(int );
+	//void printADC(); 
+
+protected: 
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
+	
+private:
+	unsigned char mode_;
 	int channel_;
 	int initSPI();
 	int killSPI();

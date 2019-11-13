@@ -2,11 +2,11 @@
 
 int main()
 {
-	Controlunit c; 
+	Moist m; 
 
 	while (1)
 	{
-		c.printADC();
+		m.printMoist();
 
 		usleep(100);
 	}

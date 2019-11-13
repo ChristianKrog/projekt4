@@ -15,7 +15,7 @@ Controlunit::~Controlunit()
 {
 	this->killSPI();
 }
-
+/*
 int Controlunit::readADC(int channel)
 {
 	unsigned char data[3];
@@ -70,8 +70,10 @@ int Controlunit::readADC(int channel)
 	resultMoist |= (data[2] & 0xff);
 
 	return resultMoist;
-}
+} 
+*/
 
+/*
 void Controlunit::printADC()
 {
 	int ch0, ch1; 
@@ -80,6 +82,7 @@ void Controlunit::printADC()
 
 	cout << "CH0: " << ch0 << " | Ch1: " << ch1 << endl;
 }
+*/
 
 int Controlunit::initSPI()
 {
