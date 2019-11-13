@@ -3,7 +3,7 @@
 #define MOIST_H
 #include "controlunit.h"
 //Check which libraries are necesarry
-/*
+
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -15,10 +15,10 @@
 #include <string>
 #include <iostream>
 using namespace std;
-*/
 
 
-class Moist : public Controlunit
+
+class Moist: public Controlunit
 {
 public: 
 	Moist();
@@ -36,6 +36,6 @@ private:
 	int moist_;
 	int sensorID_; //not used yet 
 	int valveID_; 
-	bool waterLevel
-}
+	bool waterLevel;
+};
 #endif 

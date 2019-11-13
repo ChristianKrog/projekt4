@@ -1,8 +1,8 @@
 CC = g++
 CCFLAGS = 
 LFLAGS =  
-SOURCES = controlunit.cpp main.cpp 
-DEPS = controlunit.h
+SOURCES = controlunit.cpp moist.cpp main.cpp 
+DEPS = controlunit.h moist.h
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = exe
 

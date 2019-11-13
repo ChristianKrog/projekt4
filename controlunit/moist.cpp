@@ -1,6 +1,16 @@
 #include "moist.h"
 #include <cstring>
 
+Moist::Moist()
+{
+
+}
+
+Moist::~Moist()
+{
+	
+}
+
 int Moist::getMoist(int sensorID) 
 {
 	unsigned char data[3];
@@ -43,7 +53,7 @@ int Moist::getMoist(int sensorID)
 		spi[i].cs_change = 0;
 	}
 
-	retVal = ioctl(this->spifd, SPI_IOC_MESSAGE(length), &spi);
+	retVal = ioctl(this->spifd_, SPI_IOC_MESSAGE(length), &spi);
 
 	if (retVal < 0)
 	{
@@ -65,4 +75,4 @@ void Moist::printMoist()
 
 	cout << "CH0: " << ch0 << " | Ch1: " << ch1 << endl;
 }
-}
+
