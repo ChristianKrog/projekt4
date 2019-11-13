@@ -66,7 +66,7 @@ int Temperature::getTemp()
 
 void Temperature::initDHT()
 {	
-	//wiringPiSetup();
+	wiringPiSetup();
 	//pull pin down for 18 milliseconds 
 	//pinMode(pinDHT_, OUTPUT);
 	//digitalWrite(pinDHT_, LOW);
