@@ -216,7 +216,6 @@ int Temperature::gpioRead()
 	}
 
 	close(fd);
-	cout << atoi(value_str) << endl; 
 
 	return(atoi(value_str));
 }
