@@ -2,7 +2,21 @@
 
 Temperature::Temperature()
 {
-	this->initDHT();
+	//int fd, fd1, fd2;
+	//int exportBuffer[3] = "22";
+	//int directionBuffer[4] = "in"
+
+	// fd1 = open("",O_READONLY)
+
+	pinDHT_ = 3; //GPIO 22
+	wiringPiSetup();
+	//pull pin down for 18 milliseconds s
+	pinMode(pinDHT_, OUTPUT);
+	digitalWrite(pinDHT_, LOW);
+	usleep(18);
+
+	/* prepare to read the pin */
+	pinMode(pinDHT_, INPUT);
 }
 
 Temperature::~Temperature()
@@ -48,12 +62,14 @@ int Temperature::getTemp()
 		}
 	}
 
+	//Humidity
 	float h = (float)((data[0] << 8) + data[1]) / 10;
 		if ( h > 100 )
 		{
 			h = data[0];	
 		}
-
+	
+	//Temperature
 	float c = (float)(((data[2] & 0x7F) << 8) + data[3]) / 10;
 	
 	if ( data[2] & 0x80 )
@@ -62,16 +78,4 @@ int Temperature::getTemp()
 	}	
 	
 	return c;
-}
-
-void Temperature::initDHT()
-{	
-	wiringPiSetup();
-	//pull pin down for 18 milliseconds 
-	//pinMode(pinDHT_, OUTPUT);
-	//digitalWrite(pinDHT_, LOW);
-	//usleep(18);
-
-	/* prepare to read the pin */
-	pinMode(pinDHT_, INPUT);
 }
