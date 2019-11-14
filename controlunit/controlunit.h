@@ -24,8 +24,6 @@ class Controlunit
 public:
 	Controlunit();
 	~Controlunit();
-	//int readADC(int );
-	//void printADC(); 
 
 protected: 
 	unsigned char bitsPerWord_;
@@ -34,7 +32,6 @@ protected:
 	
 private:
 	unsigned char mode_;
-	int channel_;
 	int initSPI();
 	int killSPI();
 };
