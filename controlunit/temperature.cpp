@@ -128,28 +128,13 @@ float Temperature::getTemp()
 		}
 	}
  
-	/*
-	 * check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
-	 * print it out if data is good
-	 */
-	if ( (j >= 40) &&
-	     (data[4] == ( (data[0] + data[1] + data[2] + data[3]) & 0xFF) ) )
-	{
-		float h = (float)((data[0] << 8) + data[1]) / 10;
-		if ( h > 100 )
-		{
-			h = data[0];	// for DHT11
-		}
 		c = (float)(((data[2] & 0x7F) << 8) + data[3]) / 10;
-		//if ( c > 125 )
-		//{
-			//c = data[2];	// for DHT11
-		//}
+
 		if ( data[2] & 0x80 )
 		{
 			c = -c;
 		}
-	}
+	
 	
 	return c;
 	/*
