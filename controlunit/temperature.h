@@ -1,4 +1,6 @@
 #pragma once
+#ifndef TEMPERATURE_H
+#define TEMPERATURE_H
 //#include <wiringPi.h> //might be useless 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +25,7 @@ public:
 	void stopHeater();
 private: 
 	int temp_;
-	int pinDHT_;
 	int gpioRead();
 		
-};
+}; 
+#endif
