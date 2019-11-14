@@ -37,10 +37,10 @@ Temperature::Temperature()
 		close(fd2);
 	}
 
-	//Setting port high
+	//Setting port low
 	BUF[0] = 48;
 	fd2Write = open("/sys/class/gpio/gpio17/value", O_WRONLY);
-	fd2WriteData = write(fd2Write, BUF, 1);
+	fd2WriteData = write(fd2Write, BUF, 0);
 
 	if (fd2WriteData == -1)
 	{
