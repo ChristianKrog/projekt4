@@ -49,7 +49,7 @@ Temperature::Temperature()
 	else
 	{
 		cout << "Bytes written to value : " << fd2WriteData << endl;
-		usleep(1);
+		usleep(1100);
 		close(fd2Write);
 	}
 
