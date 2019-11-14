@@ -7,8 +7,8 @@ Temperature::Temperature()
 	
 	
 	//Writing to export. Setting up port
-	if(! "/sys/class/gpio/gpio17")
-	{
+	//if(! "/sys/class/gpio/gpio17")
+	//{
 			fd1 = open("/sys/class/gpio/export", O_WRONLY);
 		fd1Data = write(fd1, exportBuffer, strlen(exportBuffer));
 		if (fd1Data == -1)
@@ -20,7 +20,7 @@ Temperature::Temperature()
 		cout << "Bytes written to export : " << fd1Data << endl;
 		close(fd1);
 		}
-	}
+	//}
 
 
 	//Writing to direction. Setting up direction for port to OUTPUT. 
