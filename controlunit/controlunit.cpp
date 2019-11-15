@@ -10,7 +10,8 @@ Controlunit::Controlunit()
 	this->spifd_ = -1;
 	this->initSPI();
 	
-	this->initUART();
+	//////////////////UART////////////////
+	//this->initUART();
 }
 
 Controlunit::~Controlunit()
@@ -87,6 +88,7 @@ int Controlunit::killSPI()
 	return statusVal;
 }
 
+/*
 int Controlunit::initUART()
 {
 	port(io, "/dev/ttyS0");
@@ -106,3 +108,4 @@ int Controlunit::initUART()
 
 	return 0;
 }
+*/

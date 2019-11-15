@@ -7,11 +7,13 @@
 class Moist;
 class Temperature;
 //#include "database.h"
-////////////UART//////////////////////
+////////////UART////////////////////// 
+/*
 #include <boost/asio.hpp> 
 #include <boost/asio/serial_port.hpp> 
 #include <boost/asio/serial_port_base.hpp>
-//////////////////////////////
+*/
+//////////////////////////////       
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -34,9 +36,12 @@ protected:
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
+	/////////////////////UART//////////////////////////////
+	/*
 	int* pathPoint;
 	asio::io_service    				io;
 	asio::serial_port   				port;
+	*/
 	
 private:
 	unsigned char mode_;

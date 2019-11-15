@@ -6,36 +6,48 @@ Moist::Moist()
 	#define NUM_OF_GPIOS 5 
 	int fd, fdVal;
 	char directionBuffer[] = "out";
+	char exportBuffer22[] = "22";
+	char exportBuffer23[] = "23";
+	char exportBuffer24[] = "24";
+	char exportBuffer25[] = "25";
+	char exportBuffer27[] = "27";
+	char pathDir22[] = "/sys/class/gpio/gpio22/direction";
+	char pathDir23[] = "/sys/class/gpio/gpio23/direction";
+	char pathDir24[] = "/sys/class/gpio/gpio24/direction";
+	char pathDir25[] = "/sys/class/gpio/gpio25/direction";
+	char pathDir27[] = "/sys/class/gpio/gpio27/direction"; 
+	char *pathDir, *exportBuffer;
 
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
 	{
 		if (i == 0) //valve 0
 		{
-			char exportBuffer[] = "22";
-			char pathDir[] = "/sys/class/gpio/gpio22/direction";;
+			pathDir = pathDir22;
+			exportBuffer = exportBuffer22;
 		}
 		if (i == 1)//valve 1
 		{
-			char exportBuffer[] = "23";
-			char pathDir[] = "/sys/class/gpio/gpio23/direction";
+			pathDir = pathDir23;
+			exportBuffer = exportBuffer23;
 		}
 		if (i == 2)//valve 2
 		{
-			char exportBuffer[] = "24";
-			char pathDir[] = "/sys/class/gpio/gpio24/direction";
+			pathDir = pathDir24;
+			exportBuffer = exportBuffer24;
 		}
 		if (i == 3)//valve 3
 		{
-			char exportBuffer[] = "25";
-			char pathDir[] = "/sys/class/gpio/gpio25/direction";
+			pathDir = pathDir25;
+			exportBuffer = exportBuffer25;
 		}
 		if (i == 4)//Pump
 		{
-			char exportBuffer[] = "27";
-			char pathDir[] = "/sys/class/gpio/gpio27/direction";
-		}		
+			pathDir = pathDir27;
+			exportBuffer = exportBuffer27;
+		}	
+
 		fd = open("/sys/class/gpio/export", O_WRONLY);
-		fdVal = write(fd1, exportBuffer, strlen(exportBuffer));
+		fdVal = write(fd, exportBuffer, strlen(exportBuffer));
 		if (fdVal == -1)
 		{
 			cout << "Error on writing to export. GPIO" << exportBuffer << ". " << strerror(errno) << endl;
@@ -43,7 +55,7 @@ Moist::Moist()
 		else
 		{
 			cout << "Bytes written to export : " << fdVal << endl;
-			close(fd1);
+			close(fd);
 		}
 
 		//Writing to direction. Setting up direction for port to OUTPUT. 
