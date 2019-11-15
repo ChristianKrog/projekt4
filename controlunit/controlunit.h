@@ -5,8 +5,13 @@
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
-#include "temperature.h"
+class Temperature;
 //#include "database.h"
+////////////UART//////////////////////
+#include <boost/asio.hpp> 
+#include <boost/asio/serial_port.hpp> 
+#include <boost/asio/serial_port_base.hpp>
+//////////////////////////////
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -29,10 +34,15 @@ protected:
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
+	int* pathPoint;
+	asio::io_service    				io;
+	asio::serial_port   				port;
 	
 private:
 	unsigned char mode_;
 	int initSPI();
 	int killSPI();
+	int initUART();
+	int killUART();
 };
 #endif

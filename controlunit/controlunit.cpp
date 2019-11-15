@@ -3,17 +3,20 @@
 
 Controlunit::Controlunit()
 {
+	//Set SPI parameters
 	this->mode_ = SPI_MODE_0;
 	this->bitsPerWord_ = 8;
 	this->speed_ = 1000000;
 	this->spifd_ = -1;
-
 	this->initSPI();
+	
+	this->initUART();
 }
 
 Controlunit::~Controlunit()
 {
 	this->killSPI();
+	this->killUART();
 }
 
 int Controlunit::initSPI()
@@ -82,4 +85,24 @@ int Controlunit::killSPI()
 		exit(1);
 	}
 	return statusVal;
+}
+
+int Controlunit::initUART()
+{
+	port(io, "/dev/ttyS0");
+	int baudrate = 57600
+
+	port.set_option(asio::serial_port_base::baud_rate(baudrate));
+	   
+	//Stopbit = 1
+	asio::serial_port_base::stop_bits 	Stop(asio::serial_port_base::stop_bits::one);
+	port.set_option(Stop);
+
+	//Parity = 0
+	asio::serial_port_base::parity 		pari(asio::serial_port_base::parity::none);	//chooses if parity bit is used
+	port.set_option(pari);
+	
+	port.close();
+
+	return 0;
 }

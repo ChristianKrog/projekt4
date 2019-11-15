@@ -3,12 +3,109 @@
 
 Moist::Moist()
 {
+	#define NUM_OF_GPIOS 5 
+	int fd, fdVal;
+	char directionBuffer[] = "out";
 
+	for (int i = 0; i < NUM_OF_GPIOS; i++)
+	{
+		if (i == 0) //valve 0
+		{
+			char exportBuffer[] = "22";
+			char pathDir[] = "/sys/class/gpio/gpio22/direction";;
+		}
+		if (i == 1)//valve 1
+		{
+			char exportBuffer[] = "23";
+			char pathDir[] = "/sys/class/gpio/gpio23/direction";
+		}
+		if (i == 2)//valve 2
+		{
+			char exportBuffer[] = "24";
+			char pathDir[] = "/sys/class/gpio/gpio24/direction";
+		}
+		if (i == 3)//valve 3
+		{
+			char exportBuffer[] = "25";
+			char pathDir[] = "/sys/class/gpio/gpio25/direction";
+		}
+		if (i == 4)//Pump
+		{
+			char exportBuffer[] = "27";
+			char pathDir[] = "/sys/class/gpio/gpio27/direction";
+		}		
+		fd = open("/sys/class/gpio/export", O_WRONLY);
+		fdVal = write(fd1, exportBuffer, strlen(exportBuffer));
+		if (fdVal == -1)
+		{
+			cout << "Error on writing to export. GPIO" << exportBuffer << ". " << strerror(errno) << endl;
+		}
+		else
+		{
+			cout << "Bytes written to export : " << fdVal << endl;
+			close(fd1);
+		}
+
+		//Writing to direction. Setting up direction for port to OUTPUT. 
+		fd = open(pathDir, O_WRONLY);
+		fdVal = write(fd2, directionBuffer, strlen(directionBuffer));
+		if (fdVal == -1)
+		{
+			cout << "Error on writing to direction. " << strerror(errno) << endl;
+		}
+		else
+		{
+			cout << "Bytes written to direction : " << fdVal << endl;
+			close(fd);
+		}
+	}
 }
 
 Moist::~Moist()
 {
-	
+#define NUM_OF_GPIOS 5 
+	int fd, fdVal;
+	char directionBuffer[] = "out";
+
+	for (int i = 0; i < NUM_OF_GPIOS; i++)
+	{
+		if (i == 0) //valve 0
+		{
+			char exportBuffer[] = "22";
+		}
+
+		if (i == 1)//valve 1
+		{
+			char exportBuffer[] = "23";
+		}
+
+		if (i == 2)//valve 2
+		{
+			char exportBuffer[] = "24";
+		}
+
+		if (i == 3)//valve 3
+		{
+			char exportBuffer[] = "25";
+		}
+
+		if (i == 4)//Pump
+		{
+			char exportBuffer[] = "27";
+		}
+
+		fd = open("/sys/class/gpio/unexport", O_WRONLY);
+		fdVal = write(fd1, exportBuffer, strlen(exportBuffer));
+		if (fdVal == -1)
+		{
+			cout << "Error on writing to unexport. " << exportBuffer << ". " << strerror(errno) << endl;
+		}
+		else
+		{
+			cout << "Bytes written to export : " << fdVal << endl;
+			close(fd1);
+		}
+	}
 }
 
 int Moist::getMoist(int sensorID) 
@@ -76,3 +173,122 @@ void Moist::printMoist()
 	cout << "CH0: " << ch0 << " | Ch1: " << ch1 << endl;
 }
 
+void Moist::startPump()
+{
+	int fd, fdVal;
+	char BUF[]; //Maybe this should have a value!? 
+	char pathVal[] = "/sys/class/gpio/gpio27/value";
+	//Setting port high
+	fd = open(pathVal, O_WRONLY);
+	fdVal = write(fd2Write, BUF, 1);
+
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to pump. " << strerror(errno) << endl;
+	}
+	else
+	{
+		cout << "Pump started" << endl;
+		close(fd);
+	}
+}
+
+void Moist::stopPump()
+{
+	int fd, fdVal;
+	char BUF[]; //Maybe this should have a value!? 
+	char pathVal[] = "/sys/class/gpio/gpio27/value";
+	//Setting port low
+	fd = open(pathVal, O_WRONLY);
+	fdVal = write(fd2Write, BUF, 0);
+
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to pump. " << strerror(errno) << endl;
+	}
+	else
+	{
+		cout << "Pump stopped" << endl;
+		close(fd);
+	}
+}
+
+void Moist::openValve(int valveID)
+{
+	int fd, fdVal; 
+	char BUF[]; //Maybe this should have a value!? 
+	if (valveID == 0)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio22/value" ;
+	}
+	else if (valveID == 1)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio23/value";
+	}
+	else if (valveID == 2)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio24/value";
+	}
+	else if (valveID == 3)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio25/value";
+	}
+	else
+	{
+		cout << "ValveID not registrated. Has to be between 1 and 4."
+	}
+
+	//Setting port high
+	fd = open(pathVal, O_WRONLY);
+	fdVal = write(fd2Write, BUF, 1);
+
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to valve" << valveID <<". " << strerror(errno) << endl;
+	}
+	else
+	{
+		cout << "Valve" << valveID << " open" << endl;
+		close(fd);
+	}
+}
+
+void Moist::closeValve(int valveID)
+{
+	int fd, fdVal;
+	char BUF[]; //Maybe this should have a value!? 
+	if (valveID == 0)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio22/value";
+	}
+	else if (valveID == 1)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio23/value";
+	}
+	else if (valveID == 2)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio24/value";
+	}
+	else if (valveID == 3)
+	{
+		char pathVal[] = "/sys/class/gpio/gpio25/value";
+	}
+	else
+	{
+		cout << "ValveID not registrated. Has to be between 1 and 4."
+	}
+
+	//Setting port Low
+	fd = open(pathVal, O_WRONLY);
+	fdVal = write(fd2Write, BUF, 0);
+
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to valve" << valveID << ". " << strerror(errno) << endl
+	}
+	else
+	{
+		cout << "Valve" << valveID << " closed" << endl;
+		close(fd);
+	}
+}

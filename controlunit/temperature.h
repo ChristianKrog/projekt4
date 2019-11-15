@@ -1,7 +1,9 @@
 #pragma once
 #ifndef TEMPERATURE_H
+#define TEMPERATURE_H
+#include "controlunit.h"
 
-class Temperature
+class Temperature: public Controlunit
 {
 public: 
 	Temperature();
@@ -17,7 +19,7 @@ private:
 	uint8_t gpioRead();
 };
 #endif
-/*#define TEMPERATURE_H
+/*
 //#include <wiringPi.h> //might be useless 
 #include <stdio.h>
 #include <stdlib.h>

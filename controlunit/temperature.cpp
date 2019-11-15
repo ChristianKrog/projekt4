@@ -1,5 +1,23 @@
 #include "temperature.h"
 
+Temperature::Temperature()
+{
+}
+
+Temperature::~Temperature()
+{
+}
+
+float Temperature::getTemp()
+{
+	float temp; 
+
+	this.>port.open("/dev/ttyS0");
+	asio::read(port, asio::buffer(&temp, 1));            //Blocking Read
+	port.close();
+
+	return temp;
+}
 
 
 
@@ -180,3 +198,5 @@ else
 
 	return((uint8_t)atoi(buf));
 } */
+
+

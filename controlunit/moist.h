@@ -2,6 +2,7 @@
 #ifndef MOIST_H
 #define MOIST_H
 #include "controlunit.h"
+
 //Check which libraries are necesarry
 /*
 #include <unistd.h>
@@ -36,7 +37,7 @@ public:
 private: 
 	int moist_;
 	int sensorID_; //not used yet 
-	int valveID_; 
-	bool waterLevel;
+	int valveID_; //not used yet
+	bool waterLevel_;
 };
 #endif 
