@@ -1,18 +1,15 @@
 #include "controlunit.h"
+#include "moist.h"
 
+	Moist m;
+	
 int main()
 {
-	Moist m; 
-	/*
-	Temperature t;
-	int temp;
-	*/
-
-
+	
 	while (1)
 	{
 		m.printMoist();
-		usleep(100);
+		sleep(1);
 
 		/*
 		temp = t.getTemp(); 

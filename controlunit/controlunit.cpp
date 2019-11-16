@@ -9,6 +9,7 @@ Controlunit::Controlunit()
 	this->speed_ = 1000000;
 	this->spifd_ = -1;
 	this->initSPI();
+	cout << "SPI active" << endl;
 	
 	//////////////////UART////////////////
 	//this->initUART();
@@ -17,82 +18,86 @@ Controlunit::Controlunit()
 Controlunit::~Controlunit()
 {
 	this->killSPI();
-	this->killUART();
+	//////////////////UART//////////
+	
+
+	//////
+	//this->killUART();
 }
 
 int Controlunit::initSPI()
 {
-	int statusVal = -1;
+	int spiVal;
 
 	this->spifd_ = open("/dev/spidev0.0", O_RDWR);
-	if (this->spifd_ < 0)
+	if (this->spifd_ == -1)
 	{
-		perror("could not open SPI device");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	statusVal = ioctl(this->spifd_, SPI_IOC_WR_MODE, &(this->mode_));
-	if (statusVal < 0) 
+	spiVal = ioctl(this->spifd_, SPI_IOC_WR_MODE, &(this->mode_));
+	if (spiVal == -1)
 	{
-		perror("Could not set SPIMode (WR)...ioctl fail");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	statusVal = ioctl(this->spifd_, SPI_IOC_RD_MODE, &(this->mode_));
-	if (statusVal < 0) 
+	spiVal = ioctl(this->spifd_, SPI_IOC_RD_MODE, &(this->mode_));
+	if (spiVal == -1)
 	{
-		perror("Could not set SPIMode (RD)...ioctl fail");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	statusVal = ioctl(this->spifd_, SPI_IOC_WR_BITS_PER_WORD, &(this->bitsPerWord_));
-	if (statusVal < 0) 
+	spiVal = ioctl(this->spifd_, SPI_IOC_WR_BITS_PER_WORD, &(this->bitsPerWord_));
+	if (spiVal == -1)
 	{
-		perror("Could not set SPI bitsPerWord (WR)...ioctl fail");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	statusVal = ioctl(this->spifd_, SPI_IOC_RD_BITS_PER_WORD, &(this->bitsPerWord_));
-	if (statusVal < 0) 
+	spiVal = ioctl(this->spifd_, SPI_IOC_RD_BITS_PER_WORD, &(this->bitsPerWord_));
+	if (spiVal == -1)
 	{
-		perror("Could not set SPI bitsPerWord (RD)...ioctl fail");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	statusVal = ioctl(this->spifd_, SPI_IOC_WR_MAX_SPEED_HZ, &(this->speed_));
-	if (statusVal < 0) 
+	spiVal = ioctl(this->spifd_, SPI_IOC_WR_MAX_SPEED_HZ, &(this->speed_));
+	if (spiVal == -1)
 	{
-		perror("Could not set SPI speed (WR)...ioctl fail");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	statusVal = ioctl(this->spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &(this->speed_));
-	if (statusVal < 0) 
+	spiVal = ioctl(this->spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &(this->speed_));
+	if (spiVal == -1)
 	{
-		perror("Could not set SPI speed (RD)...ioctl fail");
+		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
-	return statusVal;
+	return spiVal;
 }
 
 int Controlunit::killSPI()
 {
-	int statusVal = -1;
+	int spiVal = -1;
 
-	statusVal = close(this->spifd_);
-	if (statusVal < 0) 
+	spiVal = close(this->spifd_);
+	if (spiVal < 0) 
 	{
 		perror("Could not close SPI device");
 		exit(1);
 	}
-	return statusVal;
+	return spiVal;
 }
 
 /*
 int Controlunit::initUART()
 {
 	port(io, "/dev/ttyS0");
-	int baudrate = 57600
+	int baudrate = 9600
 
 	port.set_option(asio::serial_port_base::baud_rate(baudrate));
 	   

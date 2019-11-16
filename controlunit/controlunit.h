@@ -1,11 +1,10 @@
 #pragma once
 
-
-
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
-class Temperature;
+//class Temperature;
+
 //#include "database.h"
 ////////////UART////////////////////// 
 /*
@@ -47,7 +46,10 @@ private:
 	unsigned char mode_;
 	int initSPI();
 	int killSPI();
+	/////////////////////UART//////////////////////////////
+	/*
 	int initUART();
 	int killUART();
+	*/
 };
 #endif
