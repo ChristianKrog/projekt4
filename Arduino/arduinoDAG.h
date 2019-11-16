@@ -2,6 +2,7 @@
 
 #ifndef ARDUINODAG_H
 #define ARDUINODAG_H
+#include <avr/io.h>
 class DHT22
 
 class arduinoDAG

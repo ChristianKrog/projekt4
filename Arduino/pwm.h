@@ -7,9 +7,10 @@ class PWM
 public:
 	PWM();
 	~PWM();
+	void setPWMSignal(int timer, float dutyCycle);
 
 private:
 	void initPWM();
-
+	
 };
 #endif
