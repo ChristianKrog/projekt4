@@ -1,3 +1,7 @@
+#pragma once
+#ifndef ARDUINOIF_H
+#define ARDUINOIF_H
+
 #include <boost/asio.hpp> 
 #include <boost/asio/serial_port.hpp> 
 #include <boost/asio/serial_port_base.hpp>
@@ -29,4 +33,5 @@ class seriel_com    //Er som standard sat til /dev/ttyS0 portene
         asio::io_service    				io;                                 
         asio::serial_port   				port;
     };
-}
+} 
+#endif
