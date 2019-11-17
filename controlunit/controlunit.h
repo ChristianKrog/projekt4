@@ -30,6 +30,7 @@ class Controlunit
 public:
 	Controlunit();
 	~Controlunit();
+	void sendI2C(int, int);
 
 
 protected: 
@@ -39,7 +40,7 @@ protected:
 	int initSPI();
 	int killSPI();
 	void initI2C();
-	void sendI2C(int, int);
+
 
 	/////////////////////UART//////////////////////////////
 	/*
