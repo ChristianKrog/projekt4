@@ -2,7 +2,10 @@
 #include "temperature.h"
 #include "moist.h"
 
-	//Moist m;
+
+
+
+Moist m;
 Temperature t;
 int temp;
 	
@@ -13,6 +16,7 @@ int main()
 		//m.printMoist();
 		temp = t.getTemp();
 		cout << temp << endl;
+		m.printMoist();
 
 		sleep(2);
 	}

@@ -1,7 +1,7 @@
 CC = arm-rpizw-g++
 CCFLAGS = 
 LFLAGS =  
-SOURCES = controlunit.cpp moist.cpp main.cpp 
+SOURCES = controlunit.cpp moist.cpp temperature.cpp main.cpp 
 DEPS = controlunit.h moist.h temperature.h
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = exe
