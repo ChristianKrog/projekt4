@@ -1,18 +1,22 @@
-/*
- * DAG.cpp
- *
- * Created: 16-11-2019 16:54:51
- * Author : chris
- */ 
+#include "arduinoDAG.h"
+#include "dht22.h"
+#include "DHT.h"
+#include "pwm.h"
 
-#include <avr/io.h>
+#define F_CPU 16000000
 
 
-int main(void)
+int main()
 {
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
+	//PWM pwm;
+	//pwm.setPWMSignal(1, 20);
+	//DHT22 dht; 
+	DHT dht;
+	dht.begin();
+	
+	float t; 
+	t = dht.readTemperature();
+	
+	
+	return 0;
 }
-

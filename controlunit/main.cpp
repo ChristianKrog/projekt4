@@ -1,22 +1,20 @@
 #include "controlunit.h"
+#include "temperature.h"
 #include "moist.h"
 
-	Moist m;
+	//Moist m;
+Temperature t;
+int temp;
 	
 int main()
 {
-	
 	while (1)
 	{
-		m.printMoist();
-		sleep(1);
-
-		/*
-		temp = t.getTemp(); 
+		//m.printMoist();
+		temp = t.getTemp();
 		cout << temp << endl;
-		sleep(2);
-		*/
-	}
 
+		sleep(2);
+	}
 	return 0;
 }

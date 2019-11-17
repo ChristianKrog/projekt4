@@ -3,7 +3,7 @@
 #define TEMPERATURE_H
 #include "controlunit.h"
 
-class Temperature: public Controlunit
+class Temperature
 {
 public: 
 	Temperature();
@@ -12,11 +12,11 @@ public:
 	void setTemp(int );
 	void startFan();
 	void stopFan();
-	void startHeater();
-	void stopHeater();
+	//void startHeater();
+	//void stopHeater();
 private: 
-	int temp_;
-	uint8_t gpioRead();
+
+
 };
 #endif
 /*

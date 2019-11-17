@@ -10,14 +10,36 @@ Temperature::~Temperature()
 
 float Temperature::getTemp()
 {
+	char buffer[8];
 	float temp; 
+	int fd;
 
-	this.>port.open("/dev/ttyS0");
-	asio::read(port, asio::buffer(&temp, 1));            //Blocking Read
-	port.close();
+	fd = open("/dev/i2c-1", O_RDWR);
+
+	if (fd == -1) {
+		printf("fd error %s\n", strerror(errno));
+	}
+
+	ioctl(fd, 0x0703, 0x48);
+	int i2c_read;
+	i2c_read = read(fd, buffer, 2);
+
+	if (i2c_read == -1) {
+		printf("Read Error: %s\n", strerror(errno));
+		sleep(1);
+		close(fd);
+	}
+	else 
+	{
+		buffer[i2c_read] = 0;
+		printf("Temperature in degrees C: %d\n", buffer[0]);
+		close(fd);
+	}
 
 	return temp;
 }
+
+
 
 
 

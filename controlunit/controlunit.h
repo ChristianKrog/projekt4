@@ -3,7 +3,7 @@
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
-//class Temperature;
+#include "temperature.h"
 
 //#include "database.h"
 ////////////UART////////////////////// 
