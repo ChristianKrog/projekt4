@@ -18,10 +18,8 @@ Controlunit::Controlunit()
 Controlunit::~Controlunit()
 {
 	this->killSPI();
-	//////////////////UART//////////
-	
 
-	//////
+	//////////////////UART//////////////////
 	//this->killUART();
 }
 

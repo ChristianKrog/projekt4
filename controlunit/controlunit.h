@@ -23,7 +23,6 @@ class Moist;
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-using namespace std;
 
 class Controlunit
 {
@@ -35,6 +34,7 @@ protected:
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
+
 	/////////////////////UART//////////////////////////////
 	/*
 	int* pathPoint;
@@ -46,6 +46,7 @@ private:
 	unsigned char mode_;
 	int initSPI();
 	int killSPI();
+
 	/////////////////////UART//////////////////////////////
 	/*
 	int initUART();

@@ -2,9 +2,6 @@
 #include "temperature.h"
 #include "moist.h"
 
-
-
-
 Moist m;
 Temperature t;
 int temp;
