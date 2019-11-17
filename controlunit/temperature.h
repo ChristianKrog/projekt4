@@ -1,6 +1,11 @@
 #pragma once
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
+<<<<<<< Updated upstream
+=======
+#include "controlunit.h"
+#include "arduinoIF.h"
+>>>>>>> Stashed changes
 
 #include <unistd.h>
 #include <stdint.h>
