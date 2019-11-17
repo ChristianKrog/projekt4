@@ -1,11 +1,10 @@
 #include "controlunit.h"
 #include "temperature.h"
 #include "moist.h"
-#include "arduinoIF.h"
-#include <string>
+
 
 //Moist m;
-//Temperature t;
+Temperature t;
 
 int temp;
 	
@@ -22,6 +21,7 @@ int main()
 		
 		temp = t.getTemp();
 		cout << temp << endl;
+		t.sendI2C(1, 10);
 
 		
 		////////////////UART//////////////////

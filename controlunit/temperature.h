@@ -2,8 +2,6 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 #include "controlunit.h"
-#include "arduinoIF.h"
-
 
 #include <unistd.h>
 #include <stdint.h>
@@ -15,7 +13,7 @@
 #include <iostream>
 using namespace std;
 
-class Temperature
+class Temperature: public Controlunit
 {
 public: 
 	Temperature();

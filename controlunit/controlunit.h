@@ -3,7 +3,7 @@
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
-#include "temperature.h"
+class Temperature;
 
 //#include "database.h"
 ////////////UART////////////////////// 
@@ -23,6 +23,7 @@ class Moist;
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+using namespace std;
 
 class Controlunit
 {
@@ -30,10 +31,15 @@ public:
 	Controlunit();
 	~Controlunit();
 
+
 protected: 
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
+	int initSPI();
+	int killSPI();
+	void initI2C();
+	void sendI2C(int, int);
 
 	/////////////////////UART//////////////////////////////
 	/*
@@ -44,8 +50,7 @@ protected:
 	
 private:
 	unsigned char mode_;
-	int initSPI();
-	int killSPI();
+
 
 	/////////////////////UART//////////////////////////////
 	/*

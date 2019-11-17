@@ -3,13 +3,7 @@
 
 Controlunit::Controlunit()
 {
-	//Set SPI parameters
-	this->mode_ = SPI_MODE_0;
-	this->bitsPerWord_ = 8;
-	this->speed_ = 1000000;
-	this->spifd_ = -1;
-	this->initSPI();
-	cout << "SPI active" << endl;
+
 	
 	//////////////////UART////////////////
 	//this->initUART();
@@ -26,6 +20,10 @@ Controlunit::~Controlunit()
 int Controlunit::initSPI()
 {
 	int spiVal;
+	this->mode_ = SPI_MODE_0;
+	this->bitsPerWord_ = 8;
+	this->speed_ = 1000000;
+	this->spifd_ = -1;
 
 	this->spifd_ = open("/dev/spidev0.0", O_RDWR);
 	if (this->spifd_ == -1)
@@ -90,6 +88,42 @@ int Controlunit::killSPI()
 	}
 	return spiVal;
 }
+
+void Controlunit::initI2C()
+{
+		
+}
+void Controlunit::sendI2C(int timer, int dutycycle)
+{
+	char str1[1] = {(char)timer};
+	char str2[3] = {(char)dutycycle};
+	char str3[1] = {','};
+	strcat(str1, str3);
+	strcat(str1, str2);
+	char buffer[8] = {*str1};
+	int fd, fdVal;
+
+
+	fd = open("/dev/i2c-1", O_RDWR);
+
+	if (fd == -1) {
+		printf("File directory error: %s\n", strerror(errno));
+	}
+
+	ioctl(fd, 0x0703, 0x8);
+	fdVal = write(fd, buffer, strlen(buffer));
+
+	if (fdVal == -1) {
+		printf("Write Error: %s\n", strerror(errno));
+		sleep(1);
+		close(fd);
+	}
+	else 
+	{
+		close(fd);
+	}
+}
+
 
 /*
 int Controlunit::initUART()

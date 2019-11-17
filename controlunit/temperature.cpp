@@ -1,4 +1,5 @@
 #include "temperature.h"
+
 #include <cstring>
 
 
