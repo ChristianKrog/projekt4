@@ -107,19 +107,20 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 	fd = open("/dev/i2c-1", O_RDWR);
 
 	if (fd == -1) {
-		printf("File directory error: %s\n", strerror(errno));
+		cout << "Error fd i2c: " << strerror(errno) << endl;
 	}
 
 	ioctl(fd, 0x0703, 0x32);
 	fdVal = write(fd, buffer, strlen(buffer));
 
-	if (fdVal == -1) {
-		printf("Write Error: %s\n", strerror(errno));
-		sleep(1);
+	if (fdVal == -1) 
+	{
+		cout << "Error write: " << strerror(errno) << endl;
 		close(fd);
 	}
 	else 
 	{
+		cout << "succes" << endl; 
 		close(fd);
 	}
 }
