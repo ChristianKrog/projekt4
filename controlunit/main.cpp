@@ -21,14 +21,14 @@ int main()
 		
 		temp = t.getTemp();
 		cout << temp << endl;
-		t.sendI2C(1, 10);
 
+		sleep(1);
 		
 		////////////////UART//////////////////
 		//string duty = "10";
 		//port.send_string(duty);
 		
-		sleep(1);
+		
 	}
 	return 0;
 }
