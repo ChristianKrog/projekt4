@@ -1,4 +1,4 @@
-CC = arm-rpizw-g++
+CC = g++
 CCFLAGS = 
 LFLAGS =  
 SOURCES = controlunit.cpp moist.cpp temperature.cpp main.cpp 

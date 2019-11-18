@@ -95,12 +95,17 @@ void Controlunit::initI2C()
 }
 void Controlunit::sendI2C(int timer, int dutycycle)
 {
+	/*
 	char str1[1] = {(char)timer};
 	char str2[3] = {(char)dutycycle};
 	char str3[1] = {','};
 	strcat(str1, str3);
 	strcat(str1, str2);
-	char buffer[8] = {*str1};
+	*/
+
+	char buffer[2];
+	buffer[0] = (char)timer;
+	buffer[1] = (char)dutycycle;
 	int fd, fdVal;
 
 
@@ -110,7 +115,7 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 		cout << "Error fd i2c: " << strerror(errno) << endl;
 	}
 
-	ioctl(fd, I2C_SLAVE_FORCE, 0x32);
+	ioctl(fd, 0x0703, 0x32);
 	fdVal = write(fd, buffer, strlen(buffer));
 
 	if (fdVal == -1) 
@@ -120,7 +125,7 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 	}
 	else 
 	{
-		cout << "succes" << endl; 
+		cout << "succes " << buffer << endl; 
 		close(fd);
 	}
 }
