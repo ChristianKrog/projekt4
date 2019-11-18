@@ -110,7 +110,7 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 		cout << "Error fd i2c: " << strerror(errno) << endl;
 	}
 
-	ioctl(fd, 0x0703, 0x32);
+	ioctl(fd, I2C_SLAVE_FORCE, 0x32);
 	fdVal = write(fd, buffer, strlen(buffer));
 
 	if (fdVal == -1) 

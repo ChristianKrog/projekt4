@@ -18,6 +18,8 @@ class Temperature;
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/spi/spidev.h>
+#include <linux/i2c.h>
+#include <linux/i2c-dev.h>
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>

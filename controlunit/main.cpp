@@ -4,7 +4,7 @@
 
 
 //Moist m;
-//Temperature t;
+Temperature t;
 
 //int temp;
 	
@@ -21,7 +21,7 @@ int main()
 		
 		//temp = t.getTemp();
 		//cout << temp << endl;
-		//t.Controlunit::sendI2C(1,10);
+		t.Controlunit::sendI2C(1,10);
 		sleep(1);
 		
 		////////////////UART//////////////////
