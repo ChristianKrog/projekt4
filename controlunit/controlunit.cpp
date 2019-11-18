@@ -110,7 +110,7 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 		printf("File directory error: %s\n", strerror(errno));
 	}
 
-	ioctl(fd, 0x0703, 0x8);
+	ioctl(fd, 0x0703, 0x32);
 	fdVal = write(fd, buffer, strlen(buffer));
 
 	if (fdVal == -1) {

@@ -4,9 +4,9 @@
 
 
 //Moist m;
-Temperature t;
+//Temperature t;
 
-int temp;
+//int temp;
 	
 int main()
 {
@@ -19,9 +19,9 @@ int main()
 		
 		//m.printMoist();
 		
-		temp = t.getTemp();
-		cout << temp << endl;
-
+		//temp = t.getTemp();
+		//cout << temp << endl;
+		//t.Controlunit::sendI2C(1,10);
 		sleep(1);
 		
 		////////////////UART//////////////////

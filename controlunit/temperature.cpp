@@ -24,7 +24,7 @@ float Temperature::getTemp()
 		printf("File directory error: %s\n", strerror(errno));
 	}
 
-	ioctl(fd, 0x0703, 0x4C);
+	ioctl(fd, 0x0703, 0x4C); 
 	fdVal = read(fd, buffer, 2);
 
 	if (fdVal == -1) {
