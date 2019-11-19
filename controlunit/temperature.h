@@ -2,7 +2,6 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 #include "controlunit.h"
-
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>

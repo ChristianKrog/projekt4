@@ -1,21 +1,18 @@
 #include "moist.h"
 #include <cstring>
+#define NUM_OF_GPIOS 3 
 
 Moist::Moist()
 {
-	#define NUM_OF_GPIOS 5 
+
 	int fd, fdVal;
 	char directionBuffer[] = "out";
-	char exportBuffer22[] = "22";
-	char exportBuffer23[] = "23";
-	char exportBuffer24[] = "24";
-	char exportBuffer25[] = "25";
-	char exportBuffer27[] = "27";
-	char pathDir22[] = "/sys/class/gpio/gpio22/direction";
-	char pathDir23[] = "/sys/class/gpio/gpio23/direction";
-	char pathDir24[] = "/sys/class/gpio/gpio24/direction";
-	char pathDir25[] = "/sys/class/gpio/gpio25/direction";
-	char pathDir27[] = "/sys/class/gpio/gpio27/direction"; 
+	char exportBuffer22[] = "22"; //valve 0
+	char exportBuffer25[] = "25"; //valve 1
+	char exportBuffer27[] = "27"; //pump
+	char pathDir22[] = "/sys/class/gpio/gpio22/direction"; //valve 0
+	char pathDir25[] = "/sys/class/gpio/gpio25/direction"; //valve 1
+	char pathDir27[] = "/sys/class/gpio/gpio27/direction"; //pump 
 	char *pathDir, *exportBuffer;
 
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
@@ -27,20 +24,11 @@ Moist::Moist()
 		}
 		if (i == 1)//valve 1
 		{
-			pathDir = pathDir23;
-			exportBuffer = exportBuffer23;
-		}
-		if (i == 2)//valve 2
-		{
-			pathDir = pathDir24;
-			exportBuffer = exportBuffer24;
-		}
-		if (i == 3)//valve 3
-		{
 			pathDir = pathDir25;
 			exportBuffer = exportBuffer25;
 		}
-		if (i == 4)//Pump
+
+		if (i == 2)//Pump
 		{
 			pathDir = pathDir27;
 			exportBuffer = exportBuffer27;
@@ -75,12 +63,9 @@ Moist::Moist()
 
 Moist::~Moist()
 {
-#define NUM_OF_GPIOS 5 
 	int fd, fdVal;
 	char *exportBuffer;
 	char exportBuffer22[] = "22";
-	char exportBuffer23[] = "23";
-	char exportBuffer24[] = "24";
 	char exportBuffer25[] = "25";
 	char exportBuffer27[] = "27";
 
@@ -93,20 +78,10 @@ Moist::~Moist()
 
 		if (i == 1)//valve 1
 		{
-			exportBuffer = exportBuffer23;
-		}
-
-		if (i == 2)//valve 2
-		{
-			exportBuffer = exportBuffer24;
-		}
-
-		if (i == 3)//valve 3
-		{
 			exportBuffer = exportBuffer25;
 		}
 
-		if (i == 4)//Pump
+		if (i == 2)//Pump
 		{
 			exportBuffer = exportBuffer27;
 		}
@@ -236,8 +211,6 @@ void Moist::openValve(int valveID)
 	char BUF[8]; 
 	char *pathVal;
 	char pathVal22[] = "/sys/class/gpio/gpio22/value";
-	char pathVal23[] = "/sys/class/gpio/gpio23/value";
-	char pathVal24[] = "/sys/class/gpio/gpio24/value";
 	char pathVal25[] = "/sys/class/gpio/gpio25/value";
 
 	if (valveID == 0)
@@ -246,19 +219,11 @@ void Moist::openValve(int valveID)
 	}
 	else if (valveID == 1)
 	{
-		pathVal = pathVal23;
-	}
-	else if (valveID == 2)
-	{
-		pathVal = pathVal24;
-	}
-	else if (valveID == 3)
-	{
 		pathVal = pathVal25;
 	}
 	else
 	{
-		cout << "valveID not registrated. Has to be between 1 and 4." << endl;
+		cout << "valveID not registrated. Has to be 0 or 1." << endl;
 	}
 
 	//Setting port high
@@ -282,8 +247,6 @@ void Moist::closeValve(int valveID)
 	char BUF[8]; 
 	char *pathVal;
 	char pathVal22[] = "/sys/class/gpio/gpio22/value";
-	char pathVal23[] = "/sys/class/gpio/gpio23/value";
-	char pathVal24[] = "/sys/class/gpio/gpio24/value";
 	char pathVal25[] = "/sys/class/gpio/gpio25/value";
 
 	if (valveID == 0)
@@ -292,19 +255,11 @@ void Moist::closeValve(int valveID)
 	}
 	else if (valveID == 1)
 	{
-		pathVal = pathVal23;
-	}
-	else if (valveID == 2)
-	{
-		pathVal = pathVal24;
-	}
-	else if (valveID == 3)
-	{
 		pathVal = pathVal25;
 	}
 	else
 	{
-		cout << "valveID not registrated. Has to be between 1 and 4." << endl;
+		cout << "valveID not registrated. Has to be between 0 or 1" << endl;
 	}
 
 	//Setting port Low

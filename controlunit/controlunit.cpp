@@ -4,17 +4,11 @@
 Controlunit::Controlunit()
 {
 
-	
-	//////////////////UART////////////////
-	//this->initUART();
 }
 
 Controlunit::~Controlunit()
 {
 	this->killSPI();
-
-	//////////////////UART//////////////////
-	//this->killUART();
 }
 
 int Controlunit::initSPI()
@@ -93,19 +87,11 @@ void Controlunit::initI2C()
 {
 		
 }
-void Controlunit::sendI2C(int timer, int dutycycle)
+void Controlunit::sendI2C(unsigned char timer, unsigned char dutycycle)
 {
-	/*
-	char str1[1] = {(char)timer};
-	char str2[3] = {(char)dutycycle};
-	char str3[1] = {','};
-	strcat(str1, str3);
-	strcat(str1, str2);
-	*/
-
-	char buffer[2];
-	buffer[0] = (char)timer;
-	buffer[1] = (char)dutycycle;
+	unsigned char buffer[2];
+	buffer[0] = (unsigned char)timer;
+	buffer[1] = (unsigned char)dutycycle;
 	int fd, fdVal;
 
 
@@ -116,7 +102,7 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 	}
 
 	ioctl(fd, 0x0703, 0x32);
-	fdVal = write(fd, buffer, strlen(buffer));
+	fdVal = write(fd, buffer, 2);
 
 	if (fdVal == -1) 
 	{
@@ -129,26 +115,3 @@ void Controlunit::sendI2C(int timer, int dutycycle)
 		close(fd);
 	}
 }
-
-
-/*
-int Controlunit::initUART()
-{
-	port(io, "/dev/ttyS0");
-	int baudrate = 9600
-
-	port.set_option(asio::serial_port_base::baud_rate(baudrate));
-	   
-	//Stopbit = 1
-	asio::serial_port_base::stop_bits 	Stop(asio::serial_port_base::stop_bits::one);
-	port.set_option(Stop);
-
-	//Parity = 0
-	asio::serial_port_base::parity 		pari(asio::serial_port_base::parity::none);	//chooses if parity bit is used
-	port.set_option(pari);
-	
-	port.close();
-
-	return 0;
-}
-*/

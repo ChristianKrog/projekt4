@@ -30,7 +30,7 @@ class Controlunit
 public:
 	Controlunit();
 	~Controlunit();
-	void sendI2C(int, int);
+	void sendI2C(unsigned char, unsigned char);
 
 
 protected: 
