@@ -8,7 +8,7 @@ Controlunit::Controlunit()
 
 Controlunit::~Controlunit()
 {
-	this->killSPI();
+	killSPI();
 }
 
 int Controlunit::initSPI()
@@ -83,17 +83,12 @@ int Controlunit::killSPI()
 	return spiVal;
 }
 
-void Controlunit::initI2C()
-{
-		
-}
 void Controlunit::sendI2C(unsigned char timer, unsigned char dutycycle)
 {
 	unsigned char buffer[2];
 	buffer[0] = (unsigned char)timer;
 	buffer[1] = (unsigned char)dutycycle;
 	int fd, fdVal;
-
 
 	fd = open("/dev/i2c-1", O_RDWR);
 

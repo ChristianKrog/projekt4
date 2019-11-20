@@ -37,25 +37,66 @@ Temperature::Temperature()
 
 Temperature::~Temperature()
 {
+	int fd, fdVal; 
+	char exportBuffer[] = "24";
+	fd = open("/sys/class/gpio/unexport", O_WRONLY);
+	fdVal = write(fd, exportBuffer, strlen(exportBuffer));
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to unexport. " << exportBuffer << ". " << strerror(errno) << endl;
+	}
+	else
+	{
+		cout << "Bytes written to export : " << fdVal << endl;
+		close(fd);
+	}
 
 }
 
 void Temperature::startFan()
 {
+	int fd, fdVal; 
+	int BUF[8];
+	char pathVal[] = "/sys/class/gpio/gpio24/value";
 
+	fd = open(pathVal, O_WRONLY);
+	fdVal = write(fd, BUF, 1);
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to fan. " << strerror(errno) << endl;
+	}
+	else
+	{
+		cout << "Fan started" << endl;
+		close(fd);
+	}
 }
+
 
 void stopFan()
 {
+	int fd, fdVal; 
+	int BUF[8];
+	char pathVal[] = "/sys/class/gpio/gpio24/value";
 
+	fd = open(pathVal, O_WRONLY);
+	fdVal = write(fd, BUF, 0);
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to fan. " << strerror(errno) << endl;
+	}
+	else
+	{
+		cout << "Fan stopped" << endl;
+		close(fd);
+	}
 }
 
 float Temperature::getTemp()
 {
-	char buffer[8];
+	char BUF[8];
 	float temp; 
 	int fd, fdVal;
-
 
 	fd = open("/dev/i2c-1", O_RDWR);
 
@@ -65,7 +106,7 @@ float Temperature::getTemp()
 	}
 
 	ioctl(fd, 0x0703, 0x4C); 
-	fdVal = read(fd, buffer, 2);
+	fdVal = read(fd, BUF, 2);
 
 	if (fdVal == -1) 
 	{
@@ -75,8 +116,8 @@ float Temperature::getTemp()
 	}
 	else 
 	{
-		buffer[fdVal] = 0;
-		temp = buffer[0];
+		BUF[fdVal] = 0;
+		temp = BUF[0];
 		close(fd);
 	}
 	

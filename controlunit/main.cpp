@@ -10,8 +10,6 @@ Temperature t;
 	
 int main()
 {
-	////////////////UART//////////////////
-	//UART::seriel_com port(9600, 1, 0);
 
 
 	while (1)
@@ -23,12 +21,7 @@ int main()
 		//cout << temp << endl;
 		t.Controlunit::sendI2C(1,10);
 		sleep(2);
-		
-		////////////////UART//////////////////
-		//string duty = "10";
-		//port.send_string(duty);
-		
-		
+	
 	}
 	return 0;
 }

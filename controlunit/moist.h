@@ -12,14 +12,16 @@ public:
 	void setMoist(int ); 
 	void startPump();
 	void stopPump();
+
+
+private: 
+	int moist_;   //not used yet
+	int sensorID_; //not used yet 
+	int valveID_; //not used yet
+	bool waterLevel_; //not used yet 
 	void openValve(int );
 	void closeValve(int ); 
 	bool rainwaterLevel();
 	void selectWaterSupply();
-private: 
-	int moist_;
-	int sensorID_; //not used yet 
-	int valveID_; //not used yet
-	bool waterLevel_;
 };
 #endif 

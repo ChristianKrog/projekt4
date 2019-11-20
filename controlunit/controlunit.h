@@ -3,16 +3,7 @@
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
-class Temperature;
-
-//#include "database.h"
-////////////UART////////////////////// 
-/*
-#include <boost/asio.hpp> 
-#include <boost/asio/serial_port.hpp> 
-#include <boost/asio/serial_port_base.hpp>
-*/
-//////////////////////////////       
+class Temperature;     
 #include <unistd.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -39,24 +30,9 @@ protected:
 	int spifd_;
 	int initSPI();
 	int killSPI();
-	void initI2C();
+	void initI2C(); // Find out how to init.
 
-
-	/////////////////////UART//////////////////////////////
-	/*
-	int* pathPoint;
-	asio::io_service    				io;
-	asio::serial_port   				port;
-	*/
-	
 private:
 	unsigned char mode_;
-
-
-	/////////////////////UART//////////////////////////////
-	/*
-	int initUART();
-	int killUART();
-	*/
 };
 #endif

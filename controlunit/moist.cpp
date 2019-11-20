@@ -1,19 +1,27 @@
 #include "moist.h"
 #include <cstring>
-#define NUM_OF_GPIOS 3 
+#define NUM_OF_GPIOS 4 
+int fd, fdVal;
+char *exportBuffer, *pathDir, *pathVal;
+char directionOutBuffer[] = "out";
+char directionInBuffer[] = "in";
+char BUF[8];
+char exportBuffer22[] = "22"; //valve 0
+char exportBuffer25[] = "25"; //valve 1
+char exportBuffer27[] = "27"; //pump
+char exportBuffer23[] = "23"; //Waterlevelsensor
+char pathDir22[] = "/sys/class/gpio/gpio22/direction"; //valve 0
+char pathDir25[] = "/sys/class/gpio/gpio25/direction"; //valve 1
+char pathDir27[] = "/sys/class/gpio/gpio27/direction"; //pump 
+char pathDir23[] = "/sys/class/gpio/gpio23/direction"; //Waterlevelsensor
+char pathVal27[] = "/sys/class/gpio/gpio27/value"; //pump
+char pathVal22[] = "/sys/class/gpio/gpio22/value"; //valve 0
+char pathVal25[] = "/sys/class/gpio/gpio25/value"; //valve 1
+char pathVal23[] = "/sys/class/gpio/gpio23/value"; //Waterlevelsensor
 
 Moist::Moist()
 {
-
-	int fd, fdVal;
-	char directionBuffer[] = "out";
-	char exportBuffer22[] = "22"; //valve 0
-	char exportBuffer25[] = "25"; //valve 1
-	char exportBuffer27[] = "27"; //pump
-	char pathDir22[] = "/sys/class/gpio/gpio22/direction"; //valve 0
-	char pathDir25[] = "/sys/class/gpio/gpio25/direction"; //valve 1
-	char pathDir27[] = "/sys/class/gpio/gpio27/direction"; //pump 
-	char *pathDir, *exportBuffer;
+	this -> initSPI();
 
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
 	{
@@ -33,6 +41,10 @@ Moist::Moist()
 			pathDir = pathDir27;
 			exportBuffer = exportBuffer27;
 		}	
+		if (i == 3) //Waterlevelsensor
+		{
+			exportBuffer = exportBuffer23;
+		}
 
 		fd = open("/sys/class/gpio/export", O_WRONLY);
 		fdVal = write(fd, exportBuffer, strlen(exportBuffer));
@@ -48,7 +60,20 @@ Moist::Moist()
 
 		//Writing to direction. Setting up direction for port to OUTPUT. 
 		fd = open(pathDir, O_WRONLY);
-		fdVal = write(fd, directionBuffer, strlen(directionBuffer));
+		fdVal = write(fd, directionOutBuffer, strlen(directionOutBuffer));
+		if (fdVal == -1)
+		{
+			cout << "Error on writing to direction. " << strerror(errno) << endl;
+		}
+		else
+		{
+			cout << "Bytes written to direction : " << fdVal << endl;
+			close(fd);
+		}
+
+		////Writing to direction. Setting up direction for port to INPUT.(Waterlevelsensor) 
+		fd = open(pathDir23, O_WRONLY);
+		fdVal = write(fd, "in", 2);
 		if (fdVal == -1)
 		{
 			cout << "Error on writing to direction. " << strerror(errno) << endl;
@@ -63,12 +88,6 @@ Moist::Moist()
 
 Moist::~Moist()
 {
-	int fd, fdVal;
-	char *exportBuffer;
-	char exportBuffer22[] = "22";
-	char exportBuffer25[] = "25";
-	char exportBuffer27[] = "27";
-
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
 	{
 		if (i == 0) //valve 0
@@ -84,6 +103,10 @@ Moist::~Moist()
 		if (i == 2)//Pump
 		{
 			exportBuffer = exportBuffer27;
+		}
+		if (i == 3)//Waterlevelsensor
+		{
+			exportBuffer = exportBuffer23;
 		}
 
 		fd = open("/sys/class/gpio/unexport", O_WRONLY);
@@ -153,25 +176,24 @@ int Moist::getMoist(int sensorID)
 	resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
 	resultMoist |= (data[2] & 0xff);
 
+	moist_ = resultMoist;
+
 	return resultMoist;
 }
 
 void Moist::printMoist()
 {
 	int ch0, ch1;
-	ch0 = this->getMoist(0);
-	ch1 = this->getMoist(1);
+	ch0 = getMoist(0);
+	ch1 = getMoist(1);
 
 	cout << "CH0: " << ch0 << " | Ch1: " << ch1 << endl;
 }
 
 void Moist::startPump()
 {
-	int fd, fdVal;
-	char BUF[8]; 
-	char pathVal[] = "/sys/class/gpio/gpio27/value";
 	//Setting port high
-	fd = open(pathVal, O_WRONLY);
+	fd = open(pathVal27, O_WRONLY);
 	fdVal = write(fd, BUF, 1);
 
 	if (fdVal == -1)
@@ -187,11 +209,8 @@ void Moist::startPump()
 
 void Moist::stopPump()
 {
-	int fd, fdVal;
-	char BUF[8]; 
-	char pathVal[] = "/sys/class/gpio/gpio27/value";
 	//Setting port low
-	fd = open(pathVal, O_WRONLY);
+	fd = open(pathVal27, O_WRONLY);
 	fdVal = write(fd, BUF, 0);
 
 	if (fdVal == -1)
@@ -207,12 +226,6 @@ void Moist::stopPump()
 
 void Moist::openValve(int valveID)
 {
-	int fd, fdVal; 
-	char BUF[8]; 
-	char *pathVal;
-	char pathVal22[] = "/sys/class/gpio/gpio22/value";
-	char pathVal25[] = "/sys/class/gpio/gpio25/value";
-
 	if (valveID == 0)
 	{
 		pathVal = pathVal22;
@@ -243,12 +256,6 @@ void Moist::openValve(int valveID)
 
 void Moist::closeValve(int valveID)
 {
-	int fd, fdVal;
-	char BUF[8]; 
-	char *pathVal;
-	char pathVal22[] = "/sys/class/gpio/gpio22/value";
-	char pathVal25[] = "/sys/class/gpio/gpio25/value";
-
 	if (valveID == 0)
 	{
 		pathVal = pathVal22;
@@ -274,5 +281,47 @@ void Moist::closeValve(int valveID)
 	{
 		cout << "Valve" << valveID << " closed" << endl;
 		close(fd);
+	}
+}
+
+bool Moist::rainwaterLevel()
+{
+	fd = open(pathVal23, O_WRONLY);
+	fdVal = read(fd, BUF, 1);
+
+	if (fdVal == -1)
+	{
+		cout << "Error on reading from waterlevelsensor: " << strerror(errno) << endl;
+	}
+	else
+	{
+		close(fd);
+	}
+
+	if(BUF[0] == 1)
+	{
+		return true; 
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+void Moist::selectWaterSupply()
+{	
+	if(rainwaterLevel()) //opens valve0 and closes valve1 if rainwaterlevel == true;
+	{
+		openValve(0);
+		closeValve(1);
+	}
+	else if(!rainwaterLevel()) //opens valve1 and closes valve0 if rainwaterlevel == false;
+	{
+		openValve(1);
+		closeValve(0);
+	}
+	else 
+	{
+		cout << "Could not select watersupply" << endl; 
 	}
 }
