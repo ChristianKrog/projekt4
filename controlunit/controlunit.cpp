@@ -8,7 +8,7 @@ Controlunit::Controlunit()
 
 Controlunit::~Controlunit()
 {
-	killSPI();
+	
 }
 
 int Controlunit::initSPI()
@@ -85,19 +85,27 @@ int Controlunit::killSPI()
 
 void Controlunit::sendI2C(unsigned char timer, unsigned char dutycycle)
 {
+	/*
 	unsigned char buffer[2];
 	buffer[0] = (unsigned char)timer;
 	buffer[1] = (unsigned char)dutycycle;
 	int fd, fdVal;
-
+	*/
+	/////////////////////////////////////////
+	unsigned char buffer[3];
+	buffer[0] = 0;
+	buffer[1] = (unsigned char)timer;
+	buffer[2] = (unsigned char)dutycycle;
+	int fd, fdVal;
+	/////////////////////////////////////////////
 	fd = open("/dev/i2c-1", O_RDWR);
 
 	if (fd == -1) {
 		cout << "Error fd i2c: " << strerror(errno) << endl;
 	}
 
-	ioctl(fd, 0x0703, 0x32);
-	fdVal = write(fd, buffer, 2);
+	ioctl(fd, 0x0703, 0x08);
+	fdVal = write(fd, buffer, 3);
 
 	if (fdVal == -1) 
 	{

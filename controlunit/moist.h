@@ -9,19 +9,17 @@ public:
 	~Moist();
 	int getMoist(int ); 
 	void printMoist();
-	void setMoist(int ); 
+	void setMoist(int ); //not used yet
 	void startPump();
 	void stopPump();
 
 
+
 private: 
-	int moist_;   //not used yet
-	int sensorID_; //not used yet 
-	int valveID_; //not used yet
-	bool waterLevel_; //not used yet 
-	void openValve(int );
-	void closeValve(int ); 
+
 	bool rainwaterLevel();
 	void selectWaterSupply();
+	void openValve(int );
+	void closeValve(int ); 
 };
 #endif 

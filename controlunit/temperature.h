@@ -17,12 +17,11 @@ class Temperature: public Controlunit
 public: 
 	Temperature();
 	~Temperature();
-	float getTemp();
+	int getTemp();
 	void setTemp(int );
 	void startFan();
 	void stopFan();
-	//void startHeater();
-	//void stopHeater();
+
 private: 
 
 

@@ -92,10 +92,10 @@ void stopFan()
 	}
 }
 
-float Temperature::getTemp()
+int Temperature::getTemp()
 {
 	char BUF[8];
-	float temp; 
+	int temp; 
 	int fd, fdVal;
 
 	fd = open("/dev/i2c-1", O_RDWR);

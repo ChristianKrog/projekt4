@@ -21,7 +21,7 @@ char pathVal23[] = "/sys/class/gpio/gpio23/value"; //Waterlevelsensor
 
 Moist::Moist()
 {
-	this -> initSPI();
+	initSPI();
 
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
 	{
@@ -88,6 +88,8 @@ Moist::Moist()
 
 Moist::~Moist()
 {
+	killSPI();
+	
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
 	{
 		if (i == 0) //valve 0
@@ -175,8 +177,6 @@ int Moist::getMoist(int sensorID)
 
 	resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
 	resultMoist |= (data[2] & 0xff);
-
-	moist_ = resultMoist;
 
 	return resultMoist;
 }

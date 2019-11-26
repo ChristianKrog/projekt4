@@ -22,17 +22,17 @@ public:
 	Controlunit();
 	~Controlunit();
 	void sendI2C(unsigned char, unsigned char);
-
+	int initSPI();
+	int killSPI();
 
 protected: 
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
-	int initSPI();
-	int killSPI();
-	void initI2C(); // Find out how to init.
 
 private:
 	unsigned char mode_;
+	void initI2C(); // Find out how to init.
+
 };
 #endif
