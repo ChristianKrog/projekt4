@@ -20,7 +20,7 @@ int main()
 		//temp = t.getTemp();
 		//cout << temp << endl;
 		t.Controlunit::sendI2C(1,10);
-		sleep(2);
+		
 	
 	}
 	return 0;

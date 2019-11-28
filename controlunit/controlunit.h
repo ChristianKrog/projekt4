@@ -21,9 +21,9 @@ class Controlunit
 public:
 	Controlunit();
 	~Controlunit();
-	void sendI2C(unsigned char, unsigned char);
 	int initSPI();
 	int killSPI();
+	void sendI2C(unsigned char, unsigned char);
 
 protected: 
 	unsigned char bitsPerWord_;
@@ -32,7 +32,6 @@ protected:
 
 private:
 	unsigned char mode_;
-	void initI2C(); // Find out how to init.
 
 };
 #endif

@@ -1,7 +1,5 @@
 #include "temperature.h"
-
 #include <cstring>
-
 
 Temperature::Temperature()
 {
@@ -73,7 +71,7 @@ void Temperature::startFan()
 }
 
 
-void stopFan()
+void Temperature::stopFan()
 {
 	int fd, fdVal; 
 	int BUF[8];
@@ -97,6 +95,7 @@ int Temperature::getTemp()
 	char BUF[8];
 	int temp; 
 	int fd, fdVal;
+	unsigned char address = 0x4C;
 
 	fd = open("/dev/i2c-1", O_RDWR);
 
@@ -105,13 +104,12 @@ int Temperature::getTemp()
 		printf("File directory error: %s\n", strerror(errno));
 	}
 
-	ioctl(fd, 0x0703, 0x4C); 
+	ioctl(fd, 0x0703, address); 
 	fdVal = read(fd, BUF, 2);
 
 	if (fdVal == -1) 
 	{
 		printf("Read Error: %s\n", strerror(errno));
-		sleep(1);
 		close(fd);
 	}
 	else 
@@ -122,5 +120,41 @@ int Temperature::getTemp()
 	}
 	
 	return temp;
+}
+
+void Temperature::regulateTemperature(int choosePWM, int ref)  //Recives the current temperature reading togehter with the desired/reference temperature and returns the correct duty cycle for the selected PWM
+{
+	float a0Temp = 99.24;
+	float a1Temp = -98.76;
+	float b1Temp = 1;
+
+	int temp = getTemp();
+
+	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
+
+	if(errorTemp < 0)
+	{
+		startFan();
+		sleep(1);
+		stopFan();
+	}
+
+	controlsignalTemp =  (int)(a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp);	//Current controlsignal calcuation, typecasting is used to round floats correctly
+	
+	errorPriorTemp = errorTemp;						//Setting the current temperature error as the prior temperature error
+	controlsignalPriorTemp = controlsignalTemp;		//Setting the current controlsignal as the prior controlsignal
+	
+	if (controlsignalTemp >= 1000)						//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
+	{
+		Controlunit::sendI2C(choosePWM, 100);
+	}
+	else if (controlsignalTemp <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
+	{
+		Controlunit::sendI2C(choosePWM, 0);
+	}
+	else
+	{
+		Controlunit::sendI2C(choosePWM, (int)controlsignalTemp/10);   //Retuns the current controlsignal, divided by 10 to scale the duty cycle appropriately				
+	}
 }
 

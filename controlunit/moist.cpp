@@ -325,3 +325,62 @@ void Moist::selectWaterSupply()
 		cout << "Could not select watersupply" << endl; 
 	}
 }
+
+void Moist::regulateMoisture(int sensorID, int choosePWM, int ref)	//Recives the current moisture reading togehter with the desired/reference moisture level and returns the correct duty cycle
+{
+	float a0Moist = 1;
+	float a1Moist = 1;
+	float b1Moist = 1;
+
+	int moist = getMoist(sensorID);
+
+	if(sensorID == 0)
+	{
+	errorMoist0 = ref - moist;				//Error is set to the difference between the reference moisture level and the current moisture reading
+	controlsignalMoist0 = (int) (a0Moist * errorMoist0 + (a1Moist) * errorPriorMoist0 + controlsignalPriorMoist0 * b1Moist);		//Current controlsignal calcuation, typecasting is used to round floats correctly
+
+	errorPriorMoist0 = errorMoist0;					//Setting the current prior moisture error as the prior moisture error
+	controlsignalPriorMoist0 = controlsignalMoist0;	//Setting the current controlsignal as the prior controlsignal
+
+	//THE IF, ELSE IF AND ELSE STATEMENT MIGHT HAVE TO BE CHANGED WHEN THE "controlsignal_moist" CALCUATION HAS BEEN CALCUATED
+	if (controlsignalMoist0 >= 1000)					//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
+	{
+		Controlunit::sendI2C(choosePWM, 100);
+	}
+	else if (controlsignalMoist0 <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
+	{
+		Controlunit::sendI2C(choosePWM, 0);
+	}
+	else
+	{
+		Controlunit::sendI2C(choosePWM, (int)controlsignalMoist0 / 10);		//Retuns the current controlsignal, divided by 10 to scale the duty cycle appropriately and typecasted to round correctly
+	}
+	}
+	else if(sensorID == 1)
+	{
+	errorMoist1 = ref - moist;				//Error is set to the difference between the reference moisture level and the current moisture reading
+	controlsignalMoist1 = (int) (a0Moist * errorMoist1 + (a1Moist) * errorPriorMoist1 + controlsignalPriorMoist1 * b1Moist);		//Current controlsignal calcuation, typecasting is used to round floats correctly
+
+	errorPriorMoist0 = errorMoist1;					//Setting the current prior moisture error as the prior moisture error
+	controlsignalPriorMoist1 = controlsignalMoist1;	//Setting the current controlsignal as the prior controlsignal
+
+	//THE IF, ELSE IF AND ELSE STATEMENT MIGHT HAVE TO BE CHANGED WHEN THE "controlsignal_moist" CALCUATION HAS BEEN CALCUATED
+	if (controlsignalMoist1 >= 1000)					//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
+	{
+		Controlunit::sendI2C(choosePWM, 100);
+	}
+	else if (controlsignalMoist1 <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
+	{
+		Controlunit::sendI2C(choosePWM, 0);
+	}
+	else
+	{
+		Controlunit::sendI2C(choosePWM, (int)controlsignalMoist1 / 10);		//Retuns the current controlsignal, divided by 10 to scale the duty cycle appropriately and typecasted to round correctly
+	}
+	}
+	else 
+	{
+		cout << "sensorID: " << sensorID << " - not valid (Use 0 or 1)" << endl; 
+	}
+
+}

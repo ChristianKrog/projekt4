@@ -3,7 +3,7 @@
 
 Controlunit::Controlunit()
 {
-
+	
 }
 
 Controlunit::~Controlunit()
@@ -85,26 +85,19 @@ int Controlunit::killSPI()
 
 void Controlunit::sendI2C(unsigned char timer, unsigned char dutycycle)
 {
-	/*
-	unsigned char buffer[2];
-	buffer[0] = (unsigned char)timer;
-	buffer[1] = (unsigned char)dutycycle;
-	int fd, fdVal;
-	*/
-	/////////////////////////////////////////
-	unsigned char buffer[3];
-	buffer[0] = 0;
+	unsigned char buffer[3], address = 0x08;
+	buffer[0] = 0; //First data sent is dataPtr. Always 0
 	buffer[1] = (unsigned char)timer;
 	buffer[2] = (unsigned char)dutycycle;
-	int fd, fdVal;
-	/////////////////////////////////////////////
+	int fdVal, fd;
+	
 	fd = open("/dev/i2c-1", O_RDWR);
-
 	if (fd == -1) {
-		cout << "Error fd i2c: " << strerror(errno) << endl;
+		cout << "Error i2c init: " << strerror(errno) << endl;
 	}
+	ioctl(fd, 0x0703, address);
 
-	ioctl(fd, 0x0703, 0x08);
+	
 	fdVal = write(fd, buffer, 3);
 
 	if (fdVal == -1) 
