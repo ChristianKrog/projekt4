@@ -14,54 +14,54 @@ Controlunit::~Controlunit()
 int Controlunit::initSPI()
 {
 	int spiVal;
-	this->mode_ = SPI_MODE_0;
-	this->bitsPerWord_ = 8;
-	this->speed_ = 1000000;
-	this->spifd_ = -1;
+	mode_ = SPI_MODE_0;
+	bitsPerWord_ = 8;
+	speed_ = 1000000;
+	spifd_ = -1;
 
-	this->spifd_ = open("/dev/spidev0.0", O_RDWR);
-	if (this->spifd_ == -1)
+	spifd_ = open("/dev/spidev0.0", O_RDWR);
+	if (spifd_ == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	spiVal = ioctl(this->spifd_, SPI_IOC_WR_MODE, &(this->mode_));
+	spiVal = ioctl(spifd_, SPI_IOC_WR_MODE, &(mode_));
 	if (spiVal == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	spiVal = ioctl(this->spifd_, SPI_IOC_RD_MODE, &(this->mode_));
+	spiVal = ioctl(spifd_, SPI_IOC_RD_MODE, &(mode_));
 	if (spiVal == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	spiVal = ioctl(this->spifd_, SPI_IOC_WR_BITS_PER_WORD, &(this->bitsPerWord_));
+	spiVal = ioctl(spifd_, SPI_IOC_WR_BITS_PER_WORD, &(bitsPerWord_));
 	if (spiVal == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	spiVal = ioctl(this->spifd_, SPI_IOC_RD_BITS_PER_WORD, &(this->bitsPerWord_));
+	spiVal = ioctl(spifd_, SPI_IOC_RD_BITS_PER_WORD, &(bitsPerWord_));
 	if (spiVal == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	spiVal = ioctl(this->spifd_, SPI_IOC_WR_MAX_SPEED_HZ, &(this->speed_));
+	spiVal = ioctl(spifd_, SPI_IOC_WR_MAX_SPEED_HZ, &(speed_));
 	if (spiVal == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	spiVal = ioctl(this->spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &(this->speed_));
+	spiVal = ioctl(spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &(speed_));
 	if (spiVal == -1)
 	{
 		cout << "Error: " << strerror(errno) << endl;
@@ -74,7 +74,7 @@ int Controlunit::killSPI()
 {
 	int spiVal = -1;
 
-	spiVal = close(this->spifd_);
+	spiVal = close(spifd_);
 	if (spiVal < 0) 
 	{
 		perror("Could not close SPI device");

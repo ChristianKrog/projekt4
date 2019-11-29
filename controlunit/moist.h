@@ -8,7 +8,6 @@ public:
 	Moist();
 	~Moist();
 	int getMoist(int ); 
-	void printMoist();
 	void setMoist(int ); //not used yet
 	void startPump();
 	void stopPump();

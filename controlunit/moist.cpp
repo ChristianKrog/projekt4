@@ -162,12 +162,12 @@ int Moist::getMoist(int sensorID)
 		spi[i].rx_buf = (unsigned long)(data + i); // receive into "data"
 		spi[i].len = sizeof(*(data + i));
 		spi[i].delay_usecs = 0;
-		spi[i].speed_hz = this->speed_;
-		spi[i].bits_per_word = this->bitsPerWord_;
+		spi[i].speed_hz = Controlunit::speed_;
+		spi[i].bits_per_word = Controlunit::bitsPerWord_;
 		spi[i].cs_change = 0;
 	}
 
-	retVal = ioctl(this->spifd_, SPI_IOC_MESSAGE(length), &spi);
+	retVal = ioctl(Controlunit::spifd_, SPI_IOC_MESSAGE(length), &spi);
 
 	if (retVal < 0)
 	{
@@ -179,15 +179,6 @@ int Moist::getMoist(int sensorID)
 	resultMoist |= (data[2] & 0xff);
 
 	return resultMoist;
-}
-
-void Moist::printMoist()
-{
-	int ch0, ch1;
-	ch0 = getMoist(0);
-	ch1 = getMoist(1);
-
-	cout << "CH0: " << ch0 << " | Ch1: " << ch1 << endl;
 }
 
 void Moist::startPump()

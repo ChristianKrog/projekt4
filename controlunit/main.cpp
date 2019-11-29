@@ -2,26 +2,22 @@
 #include "temperature.h"
 #include "moist.h"
 
-
-//Moist m;
-Temperature t;
-
-//int temp;
-	
 int main()
 {
-
+	Moist m;
+	Temperature t;
 
 	while (1)
 	{
 		
+
+
+
+
 		//m.printMoist();
-		
 		//temp = t.getTemp();
 		//cout << temp << endl;
-		t.Controlunit::sendI2C(1,10);
-		
-	
+		//t.Controlunit::sendI2C(1,10);
 	}
 	return 0;
 }
