@@ -20,18 +20,21 @@ class Controlunit
 {
 public:
 	Controlunit();
-	~Controlunit();
-	int initSPI();
-	int killSPI();
-	void sendI2C(unsigned char, unsigned char);
+	virtual ~Controlunit();
 
 protected: 
 	unsigned char bitsPerWord_;
 	unsigned int speed_;
 	int spifd_;
+	int i2cfd_;
+	void initSPI();
+	void killSPI();
+	int readI2C(unsigned char address);
+	void sendI2C(unsigned char address, unsigned char choosePWM, unsigned char dutycycle);
 
 private:
-	unsigned char mode_;
+	void initI2C();
+	void killI2C();
 
 };
 #endif

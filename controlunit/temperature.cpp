@@ -92,47 +92,23 @@ void Temperature::stopFan()
 
 int Temperature::getTemp()
 {
-	char BUF[8];
-	int temp; 
-	int fd, fdVal;
+	int temp;
 	unsigned char address = 0x4C;
-
-	fd = open("/dev/i2c-1", O_RDWR);
-
-	if (fd == -1) 
-	{
-		printf("File directory error: %s\n", strerror(errno));
-	}
-
-	ioctl(fd, 0x0703, address); 
-	fdVal = read(fd, BUF, 2);
-
-	if (fdVal == -1) 
-	{
-		printf("Read Error: %s\n", strerror(errno));
-		close(fd);
-	}
-	else 
-	{
-		BUF[fdVal] = 0;
-		temp = BUF[0];
-		close(fd);
-	}
-	
+	temp = Controlunit::readI2C(address);
 	return temp;
 }
 
-void Temperature::regulateTemperature(int choosePWM, int ref)  //Recives the current temperature reading togehter with the desired/reference temperature and returns the correct duty cycle for the selected PWM
+void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Recives the desired/reference temperature and sends the correct duty cycle for the heat PWM on I2C slaveAddress
 {
 	float a0Temp = 99.24;
 	float a1Temp = -98.76;
 	float b1Temp = 1;
 
-	int temp = getTemp();
+	int temp = getTemp();				//Gets temperature and saves it in temp
 
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
-	if(errorTemp < 0)
+	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
 	{
 		startFan();
 		sleep(1);
@@ -146,15 +122,15 @@ void Temperature::regulateTemperature(int choosePWM, int ref)  //Recives the cur
 	
 	if (controlsignalTemp >= 1000)						//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
 	{
-		Controlunit::sendI2C(choosePWM, 100);
+		Controlunit::sendI2C(slaveAddress, 1, 100);					//Sends dutycycle 100% to PWM1
 	}
 	else if (controlsignalTemp <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
 	{
-		Controlunit::sendI2C(choosePWM, 0);
+		Controlunit::sendI2C(slaveAddress, 1, 0);						//Sends dutycycle 0% to PWM1
 	}
 	else
 	{
-		Controlunit::sendI2C(choosePWM, (int)controlsignalTemp/10);   //Retuns the current controlsignal, divided by 10 to scale the duty cycle appropriately				
+		Controlunit::sendI2C(slaveAddress, 1, (int)controlsignalTemp/10);   //Sends controlsignal divided by 10 to PWM1			
 	}
 }
 

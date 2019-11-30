@@ -8,10 +8,9 @@ class Temperature: public Controlunit
 public: 
 	Temperature();
 	~Temperature();
-	void setTemp(int );
 	void startFan();
 	void stopFan();
-	void regulateTemperature(int, int);
+	void regulateTemperature(unsigned char slaveAddress, int ref);
 
 private: 
 	int getTemp();

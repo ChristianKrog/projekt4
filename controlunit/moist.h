@@ -2,24 +2,22 @@
 #ifndef MOIST_H
 #define MOIST_H
 #include "controlunit.h"
+
 class Moist: public Controlunit
 {
 public: 
 	Moist();
 	~Moist();
-	int getMoist(int ); 
-	void setMoist(int ); //not used yet
 	void startPump();
 	void stopPump();
-	void regulateMoisture(int, int, int);
-
+	void regulateMoisture(unsigned char slaveAddress, int sensorID, int ref);
 
 private: 
-
+	int getMoist(int sensorID); 
 	bool rainwaterLevel();
 	void selectWaterSupply();
-	void openValve(int );
-	void closeValve(int );
+	void openValve(int valveID);
+	void closeValve(int valveID);
 	int errorMoist0;
 	int errorPriorMoist0;
 	int controlsignalMoist0;
