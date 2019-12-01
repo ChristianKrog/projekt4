@@ -4,7 +4,7 @@
 
 #define PSOC_I2C_ADDRESS 0x08
 #define TEMP_REF 30
-#define MOIST0_REF 50
+#define MOIST0_REF 2000
 #define MOIST1_REF 50
 #define DELAY 1
 #define MOIST_DELAY_US 100000 
@@ -15,13 +15,13 @@ int main()
 	int moist0 = 0, moist1 = 0;
 
 	Moist m;
-	Temperature t;
+	//Temperature t;
 	m.startPump(); //Start Pump so we are ready to deliver some water! 
 
 
 	while (1)
 	{
-		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
+		//t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
 		sleep(DELAY);
 
 		moist0 = m.getMoist(0);

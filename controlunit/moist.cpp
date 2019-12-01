@@ -51,6 +51,7 @@ Moist::Moist()
 		if (fdVal == -1)
 		{
 			cout << "Error on writing to export. GPIO" << exportBuffer << ". " << strerror(errno) << endl;
+			close(fd);
 		}
 		else
 		{
@@ -64,6 +65,7 @@ Moist::Moist()
 		if (fdVal == -1)
 		{
 			cout << "Error on writing to direction. " << strerror(errno) << endl;
+			close(fd;)
 		}
 		else
 		{
@@ -77,6 +79,7 @@ Moist::Moist()
 		if (fdVal == -1)
 		{
 			cout << "Error on writing to direction. " << strerror(errno) << endl;
+			close(fd);
 		}
 		else
 		{
@@ -190,6 +193,7 @@ void Moist::startPump()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to pump. " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -207,6 +211,7 @@ void Moist::stopPump()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to pump. " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -237,6 +242,7 @@ void Moist::openValve(int valveID)
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to valve" << valveID <<". " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -267,6 +273,7 @@ void Moist::closeValve(int valveID)
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to valve" << valveID << ". " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
