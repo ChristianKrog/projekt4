@@ -5,7 +5,6 @@ int fd, fdVal;
 char *exportBuffer, *pathDir, *pathVal;
 char directionOutBuffer[] = "out";
 char directionInBuffer[] = "in";
-char BUF[8];
 char exportBuffer22[] = "22"; //valve 0
 char exportBuffer25[] = "25"; //valve 1
 char exportBuffer27[] = "27"; //pump
@@ -65,7 +64,7 @@ Moist::Moist()
 		if (fdVal == -1)
 		{
 			cout << "Error on writing to direction. " << strerror(errno) << endl;
-			close(fd;)
+			close(fd);
 		}
 		else
 		{
@@ -187,6 +186,8 @@ int Moist::getMoist(int sensorID)
 void Moist::startPump()
 {
 	//Setting port high
+	char BUF[1];
+	BUF[0]= 1; 
 	fd = open(pathVal27, O_WRONLY);
 	fdVal = write(fd, BUF, 1);
 
@@ -204,9 +205,11 @@ void Moist::startPump()
 
 void Moist::stopPump()
 {
+	char BUF[1];
+	BUF[0] = 0;
 	//Setting port low
 	fd = open(pathVal27, O_WRONLY);
-	fdVal = write(fd, BUF, 0);
+	fdVal = write(fd, BUF, 1);
 
 	if (fdVal == -1)
 	{
@@ -222,6 +225,7 @@ void Moist::stopPump()
 
 void Moist::openValve(int valveID)
 {
+	char BUF[1];
 	if (valveID == 0)
 	{
 		pathVal = pathVal22;
@@ -252,7 +256,8 @@ void Moist::openValve(int valveID)
 }
 
 void Moist::closeValve(int valveID)
-{
+{	
+	char BUF[1];
 	if (valveID == 0)
 	{
 		pathVal = pathVal22;
@@ -284,6 +289,7 @@ void Moist::closeValve(int valveID)
 
 bool Moist::rainwaterLevel()
 {
+	char BUF[1];
 	fd = open(pathVal23, O_WRONLY);
 	fdVal = read(fd, BUF, 1);
 
