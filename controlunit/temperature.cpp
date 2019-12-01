@@ -108,13 +108,14 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	cout << temp << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
+	/*
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
 	{
 		startFan();
 		sleep(1);
 		stopFan();
-	}
-
+	}*/
+	
 	controlsignalTemp =  (int)(a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp);	//Current controlsignal calcuation, typecasting is used to round floats correctly
 	
 	errorPriorTemp = errorTemp;						//Setting the current temperature error as the prior temperature error
@@ -130,7 +131,8 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	}
 	else
 	{
-		Controlunit::sendI2C(slaveAddress, 1, (int)controlsignalTemp/10);   //Sends controlsignal divided by 10 to PWM1			
+		int dutycycle = (int)controlsignalTemp/10
+		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   //Sends controlsignal divided by 10 to PWM1			
 	}
 }
 
