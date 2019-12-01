@@ -11,15 +11,15 @@
 
 int main()
 {
-	Moist m;
+	//Moist m;
 	Temperature t;
-	m.startPump(); //Start Pump so we are ready to deliver some water! 
+	//m.startPump(); //Start Pump so we are ready to deliver some water! 
 
 	while (1)
 	{
 		t.regulateTemperature(PSOC_I2C_ADRESS, TEMP_REF);
-		m.regulateMoisture(PSOC_I2C_ADRESS, 0, MOIST0_REF);
-		m.regulateMoisture(PSOC_I2C_ADRESS, 1, MOIST1_REF);
+		//m.regulateMoisture(PSOC_I2C_ADRESS, 0, MOIST0_REF);
+		//m.regulateMoisture(PSOC_I2C_ADRESS, 1, MOIST1_REF);
 		sleep(DELAY);
 		
 		//temp = t.getTemp();

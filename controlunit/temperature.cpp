@@ -116,7 +116,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 		stopFan();
 	}*/
 	
-	controlsignalTemp =  (int)(a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp);	//Current controlsignal calcuation, typecasting is used to round floats correctly
+	controlsignalTemp =  a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp;	//Current controlsignal calcuation, typecasting is used to round floats correctly
 	
 	errorPriorTemp = errorTemp;						//Setting the current temperature error as the prior temperature error
 	controlsignalPriorTemp = controlsignalTemp;		//Setting the current controlsignal as the prior controlsignal
@@ -131,7 +131,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	}
 	else
 	{
-		int dutycycle = (int)controlsignalTemp/10
+		int dutycycle = (int)controlsignalTemp/10;
 		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   //Sends controlsignal divided by 10 to PWM1			
 	}
 }

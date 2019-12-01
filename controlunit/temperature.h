@@ -14,9 +14,9 @@ public:
 
 private: 
 	int getTemp();
-	int errorTemp;
-	int errorPriorTemp;
-	int controlsignalTemp;
-	int controlsignalPriorTemp;
+	float errorTemp;
+	float errorPriorTemp;
+	float controlsignalTemp;
+	float controlsignalPriorTemp;
 };
 #endif
