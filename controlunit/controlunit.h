@@ -21,6 +21,7 @@ class Controlunit
 public:
 	Controlunit();
 	virtual ~Controlunit();
+	void sendI2C(unsigned char address, unsigned char choosePWM, unsigned char dutycycle);
 
 protected: 
 	unsigned char bitsPerWord_;
@@ -30,7 +31,7 @@ protected:
 	void initSPI();
 	void killSPI();
 	int readI2C(unsigned char address);
-	void sendI2C(unsigned char address, unsigned char choosePWM, unsigned char dutycycle);
+	
 
 private:
 	void initI2C();

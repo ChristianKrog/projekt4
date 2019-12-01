@@ -13,6 +13,7 @@ Temperature::Temperature()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to export. GPIO" << exportBuffer << ". " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -25,6 +26,7 @@ Temperature::Temperature()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to direction. " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -42,6 +44,7 @@ Temperature::~Temperature()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to unexport. " << exportBuffer << ". " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -54,7 +57,7 @@ Temperature::~Temperature()
 void Temperature::startFan()
 {
 	int fd, fdVal; 
-	int BUF[8];
+	int BUF[8];  				///change to 1 in all places. 
 	char pathVal[] = "/sys/class/gpio/gpio24/value";
 
 	fd = open(pathVal, O_WRONLY);
@@ -62,6 +65,7 @@ void Temperature::startFan()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to fan. " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -82,6 +86,7 @@ void Temperature::stopFan()
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to fan. " << strerror(errno) << endl;
+		close(fd);
 	}
 	else
 	{
@@ -108,15 +113,15 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	cout << temp << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
-	/*
+	
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
 	{
 		startFan();
 		sleep(1);
 		stopFan();
-	}*/
+	}
 	
-	controlsignalTemp =  a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp;	//Current controlsignal calcuation, typecasting is used to round floats correctly
+	controlsignalTemp = a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp;	//Current controlsignal calcuation, typecasting is used to round floats correctly
 	
 	errorPriorTemp = errorTemp;						//Setting the current temperature error as the prior temperature error
 	controlsignalPriorTemp = controlsignalTemp;		//Setting the current controlsignal as the prior controlsignal

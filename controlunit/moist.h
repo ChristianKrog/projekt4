@@ -11,9 +11,9 @@ public:
 	void startPump();
 	void stopPump();
 	void regulateMoisture(unsigned char slaveAddress, int sensorID, int ref);
+	int getMoist(int sensorID);
 
 private: 
-	int getMoist(int sensorID); 
 	bool rainwaterLevel();
 	void selectWaterSupply();
 	void openValve(int valveID);
