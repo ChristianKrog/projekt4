@@ -56,12 +56,11 @@ Temperature::~Temperature()
 
 void Temperature::startFan()
 {
-	int fd, fdVal; 
-	int BUF[8];  				///change to 1 in all places. 
+	int fd, fdVal;  				///change to 1 in all places. 
 	char pathVal[] = "/sys/class/gpio/gpio24/value";
 
 	fd = open(pathVal, O_WRONLY);
-	fdVal = write(fd, BUF, 1);
+	fdVal = write(fd, "1", 1);
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to fan. " << strerror(errno) << endl;
@@ -78,11 +77,10 @@ void Temperature::startFan()
 void Temperature::stopFan()
 {
 	int fd, fdVal; 
-	int BUF[8];
 	char pathVal[] = "/sys/class/gpio/gpio24/value";
 
 	fd = open(pathVal, O_WRONLY);
-	fdVal = write(fd, BUF, 0);
+	fdVal = write(fd, "0", 1);
 	if (fdVal == -1)
 	{
 		cout << "Error on writing to fan. " << strerror(errno) << endl;

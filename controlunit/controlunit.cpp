@@ -143,6 +143,6 @@ void Controlunit::sendI2C(unsigned char address, unsigned char choosePWM, unsign
 	}
 	else 
 	{
-		cout << "succes " << sizeof(buffer) << endl; 
+		//cout << "succes " << sizeof(buffer) << endl; 
 	}
 }
