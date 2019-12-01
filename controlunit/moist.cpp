@@ -329,7 +329,7 @@ void Moist::regulateMoisture(unsigned char slaveAddress, int sensorID, int ref)	
 	if(sensorID == 0)
 	{
 		errorMoist0 = ref - moist;				//Error is set to the difference between the reference moisture level and the current moisture reading
-		controlsignalMoist0 = (int) (a0Moist * errorMoist0 + (a1Moist) * errorPriorMoist0 + controlsignalPriorMoist0 * b1Moist);		//Current controlsignal calcuation, typecasting is used to round floats correctly
+		controlsignalMoist0 = a0Moist * errorMoist0 + (a1Moist) * errorPriorMoist0 + controlsignalPriorMoist0 * b1Moist;		//Current controlsignal calcuation, typecasting is used to round floats correctly
 
 		errorPriorMoist0 = errorMoist0;					//Setting the current prior moisture error as the prior moisture error
 		controlsignalPriorMoist0 = controlsignalMoist0;	//Setting the current controlsignal as the prior controlsignal
@@ -352,7 +352,7 @@ void Moist::regulateMoisture(unsigned char slaveAddress, int sensorID, int ref)	
 	else if(sensorID == 1)
 	{
 		errorMoist1 = ref - moist;				//Error is set to the difference between the reference moisture level and the current moisture reading
-		controlsignalMoist1 = (int) (a0Moist * errorMoist1 + (a1Moist) * errorPriorMoist1 + controlsignalPriorMoist1 * b1Moist);		//Current controlsignal calcuation, typecasting is used to round floats correctly
+		controlsignalMoist1 = a0Moist * errorMoist1 + (a1Moist) * errorPriorMoist1 + controlsignalPriorMoist1 * b1Moist;		//Current controlsignal calcuation, typecasting is used to round floats correctly
 
 		errorPriorMoist0 = errorMoist1;					//Setting the current prior moisture error as the prior moisture error
 		controlsignalPriorMoist1 = controlsignalMoist1;	//Setting the current controlsignal as the prior controlsignal

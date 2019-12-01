@@ -18,13 +18,13 @@ private:
 	void selectWaterSupply();
 	void openValve(int valveID);
 	void closeValve(int valveID);
-	int errorMoist0;
-	int errorPriorMoist0;
-	int controlsignalMoist0;
-	int controlsignalPriorMoist0; 
-	int errorMoist1;
-	int errorPriorMoist1;
-	int controlsignalMoist1;
-	int controlsignalPriorMoist1; 
+	float errorMoist0;
+	float errorPriorMoist0;
+	float controlsignalMoist0;
+	float controlsignalPriorMoist0; 
+	float errorMoist1;
+	float errorPriorMoist1;
+	float controlsignalMoist1;
+	float controlsignalPriorMoist1; 
 };
 #endif 
