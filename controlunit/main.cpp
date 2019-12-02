@@ -11,8 +11,13 @@
 
 int main()
 {	
-	Moist m;
+	//Moist m;
 	Temperature t;
+
+	t.errorTemp = 0; 
+	t.errorPriorTemp = 0;
+	t.controlsignalTemp = 0;
+	t.controlsignalPriorTemp = 0; 
 	
 	while (1)
 	{
