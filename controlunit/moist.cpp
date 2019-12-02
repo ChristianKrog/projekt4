@@ -131,6 +131,9 @@ int Moist::getMoist(int sensorID)
 {
 	unsigned char data[3];
 	int resultMoist = 0, length = 0;
+	float moistCal = 0;
+	unsigned char bitsPerWord = 8;
+	unsigned int speed = 1000000;
 	
 	if (sensorID == 0)
 	{
@@ -164,8 +167,8 @@ int Moist::getMoist(int sensorID)
 		spi[i].rx_buf = (unsigned long)(data + i); // receive into "data"
 		spi[i].len = sizeof(*(data + i));
 		spi[i].delay_usecs = 0;
-		spi[i].speed_hz = Controlunit::speed_;
-		spi[i].bits_per_word = Controlunit::bitsPerWord_;
+		spi[i].speed_hz = speed;
+		spi[i].bits_per_word = bitsPerWord;
 		spi[i].cs_change = 0;
 	}
 
@@ -180,7 +183,19 @@ int Moist::getMoist(int sensorID)
 	resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
 	resultMoist |= (data[2] & 0xff);
 
-	return resultMoist;
+	////////////////CALIBRATION/////////////
+	if(sensorID == 0)
+	{
+		moistCal = (resultMoist - 1667.7)/(-6.549);
+		return (int)moistCal;
+	}
+	else
+	{
+		moistCal = (resultMoist - 1772.2)/(-7.518);
+		return (int)moistCal;
+	}
+
+	////////////////CALIBRATION/////////////
 }
 
 void Moist::startPump()

@@ -1,6 +1,5 @@
-CC = g++
+CC = g++ #arm-rpizw-g++ 
 CCFLAGS = 
-LFLAGS =  
 SOURCES = controlunit.cpp moist.cpp temperature.cpp main.cpp 
 DEPS = controlunit.h moist.h temperature.h
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -16,4 +15,4 @@ clean: ##Remove files made by makefile
 
 .PHONY: copy
 copy: ##copy to rpi 
-	scp $(EXECUTABLE) $(rpiAddress):
+	sudo scp $(EXECUTABLE) $(rpiAddress):

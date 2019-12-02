@@ -24,8 +24,6 @@ public:
 	void sendI2C(unsigned char address, unsigned char choosePWM, unsigned char dutycycle);
 
 protected: 
-	unsigned char bitsPerWord_;
-	unsigned int speed_;
 	int spifd_;
 	int i2cfd_;
 	void initSPI();

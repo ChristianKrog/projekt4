@@ -98,7 +98,34 @@ int Temperature::getTemp()
 	int temp;
 	unsigned char address = 0x4C;
 	temp = Controlunit::readI2C(address);
-	return temp;
+
+	/////////////CALIBRATION//////////////
+	if(temp >= 14 && temp <= 16)
+	{
+		temp -= 4;
+		return temp;
+	}
+	else if(temp >= 17 && temp <= 22)
+	{
+		temp -= 3;
+		return temp;
+	}
+	else if(temp >= 23 && temp <= 27)
+	{
+		temp -= 2;
+		return temp;
+	}
+	else if(temp >= 28 && temp <= 31)
+	{
+		temp -= 1;
+		return temp;
+	}
+	/////////////CALIBRATION//////////////
+	else
+	{
+		return temp; //return temp without calibration
+	}
+	
 }
 
 void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Recives the desired/reference temperature and sends the correct duty cycle for the heat PWM on I2C slaveAddress

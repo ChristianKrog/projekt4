@@ -15,8 +15,8 @@ void Controlunit::initSPI()
 {
 	int fdVal;
 	unsigned char spiMode = SPI_MODE_0;
-	bitsPerWord_ = 8;
-	speed_ = 1000000;
+	unsigned char bitsPerWord = 8;
+	unsigned int speed = 1000000;
 
 	spifd_ = open("/dev/spidev0.0", O_RDWR);
 	if (spifd_ == -1)
@@ -39,28 +39,28 @@ void Controlunit::initSPI()
 		exit(1);
 	}
 
-	fdVal = ioctl(spifd_, SPI_IOC_WR_BITS_PER_WORD, &bitsPerWord_);
+	fdVal = ioctl(spifd_, SPI_IOC_WR_BITS_PER_WORD, &bitsPerWord);
 	if (fdVal == -1)
 	{
 		cout << "Could not set SPI bits per word: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	fdVal = ioctl(spifd_, SPI_IOC_RD_BITS_PER_WORD, &bitsPerWord_);
+	fdVal = ioctl(spifd_, SPI_IOC_RD_BITS_PER_WORD, &bitsPerWord);
 	if (fdVal == -1)
 	{
 		cout << "Could not read SPI bits per word " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	fdVal = ioctl(spifd_, SPI_IOC_WR_MAX_SPEED_HZ, &speed_);
+	fdVal = ioctl(spifd_, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
 	if (fdVal == -1)
 	{
 		cout << "Could not set SPI speed: " << strerror(errno) << endl;
 		exit(1);
 	}
 
-	fdVal = ioctl(spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &speed_);
+	fdVal = ioctl(spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
 	if (fdVal == -1)
 	{
 		cout << "Could not read SPI speed: " << strerror(errno) << endl;
