@@ -9,7 +9,6 @@
 #define DELAY 1
 #define MOIST_DELAY_US 100000 
 
-
 int main()
 {	
 	//int moist0 = 0, moist1 = 0;
@@ -17,7 +16,9 @@ int main()
 	Moist m;
 	Temperature t;
 	
-	//m.startPump(); //Start Pump so we are ready to deliver some water! 
+	m.startPump(); //Start Pump so we are ready to deliver some water! 
+	sleep(DELAY);
+	m.stopPump();
 
 
 	while (1)
