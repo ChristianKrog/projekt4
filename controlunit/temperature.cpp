@@ -99,6 +99,7 @@ int Temperature::getTemp()
 	unsigned char address = 0x4C;  ///use address: 0x4C //fhat address: 0x48  
 	temp = Controlunit::readI2C(address);
 
+	/*
 	/////////////CALIBRATION//////////////
 	if(temp >= 14 && temp <= 16)
 	{
@@ -125,6 +126,9 @@ int Temperature::getTemp()
 	{
 		return temp; //return temp without calibration
 	}
+	*/
+
+	return temp;
 	
 }
 
