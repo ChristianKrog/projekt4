@@ -54,7 +54,7 @@ Moist::Moist()
 		}
 		else
 		{
-			cout << "Bytes written to export : " << fdVal << endl;
+			cout << "Bytes written to export GPIO" << exportBuffer << ": " << fdVal << endl;
 			close(fd);
 		}
 
@@ -68,11 +68,11 @@ Moist::Moist()
 		}
 		else
 		{
-			cout << "Bytes written to direction : " << fdVal << endl;
+			cout << "Bytes written to " << pathDir << ": " << fdVal << endl;
 			close(fd);
 		}
 
-		////Writing to direction. Setting up direction for port to INPUT.(Waterlevelsensor) 
+		//Writing to direction. Setting up direction for port to INPUT.(Waterlevelsensor - GPIO23) 
 		fd = open(pathDir23, O_WRONLY);
 		fdVal = write(fd, "in", 2);
 		if (fdVal == -1)
@@ -82,7 +82,7 @@ Moist::Moist()
 		}
 		else
 		{
-			cout << "Bytes written to direction : " << fdVal << endl;
+			cout << "Bytes written to " << pathDir23 << ": " << fdVal << endl;
 			close(fd);
 		}
 	}

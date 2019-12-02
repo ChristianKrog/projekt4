@@ -23,12 +23,14 @@ int main()
 
 	while (1)
 	{
+		/*
 		moist0 = m.getMoist(0);
 		moist1 = m.getMoist(1);
 
 		cout << moist0  << " | " << moist1 << endl; 
 
 		sleep(DELAY);
+		*/
 
 		/*
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
