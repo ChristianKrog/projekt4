@@ -313,16 +313,18 @@ bool Moist::rainwaterLevel()
 		cout << "Error on reading from waterlevelsensor: " << strerror(errno) << endl;
 	}
 	else
-	{
+	{	
 		close(fd);
 	}
 
 	if(BUF[0] == 1)
 	{
+		cout << "There is water in Rainwater Tank! :-)" << end;
 		return true; 
 	}
 	else 
 	{
+		cout << "No water in Rainwater Tank! :-(" << endl;
 		return false;
 	}
 }
