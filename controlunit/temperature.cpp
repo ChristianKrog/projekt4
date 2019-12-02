@@ -3,6 +3,11 @@
 
 Temperature::Temperature()
 {
+	errorTemp = 0; 
+	errorPriorTemp = 0;
+	controlsignalTemp = 0;
+	controlsignalPriorTemp = 0; 
+
 	int fd, fdVal;
 	char directionBuffer[] = "out";
 	char exportBuffer[] = "24"; //Fan
@@ -149,7 +154,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 		sleep(1);
 		stopFan();
 	}*/
-	controlsignalTemp = 0;
+	
 	controlsignalTemp = ((a0Temp * errorTemp) + ((a1Temp) * errorPriorTemp) + (controlsignalPriorTemp * b1Temp));	//Current controlsignal calcuation, typecasting is used to round floats correctly
 	cout << "controlsignalTemp: " << controlsignalTemp << endl; 
 
