@@ -150,8 +150,9 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 		stopFan();
 	}*/
 	
-	controlsignalTemp = a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp;	//Current controlsignal calcuation, typecasting is used to round floats correctly
-	
+	controlsignalTemp = ((a0Temp * errorTemp) + ((a1Temp) * errorPriorTemp) + (controlsignalPriorTemp * b1Temp));	//Current controlsignal calcuation, typecasting is used to round floats correctly
+	cout << "controlsignalTemp: " << controlsignalTemp << endl; 
+
 	errorPriorTemp = errorTemp;						//Setting the current temperature error as the prior temperature error
 	controlsignalPriorTemp = controlsignalTemp;		//Setting the current controlsignal as the prior controlsignal
 	
