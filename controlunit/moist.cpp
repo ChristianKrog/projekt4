@@ -71,21 +71,22 @@ Moist::Moist()
 			cout << "Bytes written to " << pathDir << ": " << fdVal << endl;
 			close(fd);
 		}
-
-		//Writing to direction. Setting up direction for port to INPUT.(Waterlevelsensor - GPIO23) 
-		fd = open(pathDir23, O_WRONLY);
-		fdVal = write(fd, "in", 2);
-		if (fdVal == -1)
-		{
-			cout << "Error on writing to direction. DIR: "  << pathDir23 << "Error message: " << strerror(errno) << endl;
-			close(fd);
-		}
-		else
-		{
-			cout << "Bytes written to " << pathDir23 << ": " << fdVal << endl;
-			close(fd);
-		}
 	}
+
+	//Writing to direction. Setting up direction for port to INPUT.(Waterlevelsensor - GPIO23) 
+	fd = open(pathDir23, O_WRONLY);
+	fdVal = write(fd, "in", 2);
+	if (fdVal == -1)
+	{
+		cout << "Error on writing to direction. DIR: "  << pathDir23 << "Error message: " << strerror(errno) << endl;
+		close(fd);
+	}
+	else
+	{
+		cout << "Bytes written to " << pathDir23 << ": " << fdVal << endl;
+		close(fd);
+	}
+	
 }
 
 Moist::~Moist()
