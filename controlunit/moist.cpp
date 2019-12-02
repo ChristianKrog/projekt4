@@ -304,7 +304,7 @@ void Moist::closeValve(int valveID)
 
 bool Moist::rainwaterLevel()
 {	
-	char BUF[8];
+	char BUF[1];
 	fd = open(pathVal23, O_RDONLY);
 	fdVal = read(fd, BUF, 1);
 
@@ -314,11 +314,10 @@ bool Moist::rainwaterLevel()
 	}
 	else
 	{	
-		BUF[fdVal] = 0;
 		close(fd);
 	}
 
-	if(BUF == "1")
+	if(BUF[0] == 1)
 	{
 		cout << "There is water in Rainwater Tank! :-)" << endl;
 		return true; 
