@@ -404,6 +404,4 @@ void Moist::regulateMoisture(unsigned char slaveAddress, int sensorID, int ref)	
 	{
 		cout << "sensorID: " << sensorID << " - not valid (Use 0 or 1)" << endl; 
 	}
-	
-
 }

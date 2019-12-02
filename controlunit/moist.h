@@ -12,10 +12,10 @@ public:
 	void stopPump();
 	void regulateMoisture(unsigned char slaveAddress, int sensorID, int ref);
 	int getMoist(int sensorID);
+	void selectWaterSupply();
 
 private: 
 	bool rainwaterLevel();
-	void selectWaterSupply();
 	void openValve(int valveID);
 	void closeValve(int valveID);
 	float errorMoist0;
