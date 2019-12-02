@@ -3,7 +3,7 @@
 #include "moist.h"
 
 #define PSOC_I2C_ADDRESS 0x08
-#define TEMP_REF 30
+#define TEMP_REF 27
 #define MOIST0_REF 10
 #define MOIST1_REF 10
 #define DELAY 1
@@ -14,6 +14,15 @@ int main()
 	Moist m;
 	Temperature t;
 	
+	while (1)
+	{
+		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
+		sleep(DELAY);
+	}
+	return 0;
+}
+
+
 	//int moist0 = 0, moist1 = 0;
 	/*
 	m.startPump(); //Start Pump so we are ready to deliver some water! 
@@ -21,9 +30,6 @@ int main()
 	m.stopPump();
 	*/
 
-
-	while (1)
-	{
 		/*
 		cout << "Temperatur: "<< t.readI2C(0x48) << endl;
 		sleep(1);
@@ -37,11 +43,6 @@ int main()
 
 		sleep(DELAY);
 		*/
-		
-		
-		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
-		sleep(DELAY);
-		
 
 		/*
 		moist0 = m.getMoist(0);
@@ -67,6 +68,3 @@ int main()
 		cout << temp << endl;
 		t.Controlunit::sendI2C(1,10);
 		*/
-	}
-	return 0;
-}
