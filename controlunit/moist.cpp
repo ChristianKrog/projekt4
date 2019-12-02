@@ -305,7 +305,7 @@ void Moist::closeValve(int valveID)
 bool Moist::rainwaterLevel()
 {	
 	char BUF[1];
-	fd = open(pathVal23, O_WRONLY);
+	fd = open(pathVal23, O_RDONLY);
 	fdVal = read(fd, BUF, 1);
 
 	if (fdVal == -1)
