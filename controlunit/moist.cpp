@@ -58,19 +58,23 @@ Moist::Moist()
 			close(fd);
 		}
 
-		//Writing to direction. Setting up direction for port to OUTPUT. 
-		fd = open(pathDir, O_WRONLY);
-		fdVal = write(fd, directionOutBuffer, strlen(directionOutBuffer));
-		if (fdVal == -1)
+		if(i < 3)
 		{
-			cout << "Error on writing to direction. DIR: "  << pathDir << "Error message: " << strerror(errno) << endl;
-			close(fd);
+			//Writing to direction. Setting up direction for port to OUTPUT. 
+			fd = open(pathDir, O_WRONLY);
+			fdVal = write(fd, directionOutBuffer, strlen(directionOutBuffer));
+			if (fdVal == -1)
+			{
+				cout << "Error on writing to direction. DIR: "  << pathDir << "Error message: " << strerror(errno) << endl;
+				close(fd);
+			}
+			else
+			{
+				cout << "Bytes written to " << pathDir << ": " << fdVal << endl;
+				close(fd);
+			}
 		}
-		else
-		{
-			cout << "Bytes written to " << pathDir << ": " << fdVal << endl;
-			close(fd);
-		}
+
 	}
 
 	//Writing to direction. Setting up direction for port to INPUT.(Waterlevelsensor - GPIO23) 

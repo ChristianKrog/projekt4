@@ -12,7 +12,7 @@
 
 int main()
 {	
-	int moist0 = 0, moist1 = 0;
+	//int moist0 = 0, moist1 = 0;
 
 	Moist m;
 	Temperature t;
