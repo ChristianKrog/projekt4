@@ -63,7 +63,7 @@ Moist::Moist()
 		fdVal = write(fd, directionOutBuffer, strlen(directionOutBuffer));
 		if (fdVal == -1)
 		{
-			cout << "Error on writing to direction. " << strerror(errno) << endl;
+			cout << "Error on writing to direction. DIR: "  << pathDir << "Error message: " << strerror(errno) << endl;
 			close(fd);
 		}
 		else
@@ -77,7 +77,7 @@ Moist::Moist()
 		fdVal = write(fd, "in", 2);
 		if (fdVal == -1)
 		{
-			cout << "Error on writing to direction. " << strerror(errno) << endl;
+			cout << "Error on writing to direction. DIR: "  << pathDir23 << "Error message: " << strerror(errno) << endl;
 			close(fd);
 		}
 		else
