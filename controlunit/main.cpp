@@ -15,9 +15,8 @@ int main()
 	int moist0 = 0, moist1 = 0;
 
 	Moist m;
-	//Temperature t;
+	Temperature t;
 	
-
 	//m.startPump(); //Start Pump so we are ready to deliver some water! 
 
 
