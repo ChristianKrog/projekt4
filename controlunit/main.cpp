@@ -11,26 +11,28 @@
 
 int main()
 {	
-	//int moist0 = 0, moist1 = 0;
+	int moist0 = 0, moist1 = 0;
 
 	Moist m;
 	Temperature t;
 	
+	/*
 	m.startPump(); //Start Pump so we are ready to deliver some water! 
 	sleep(DELAY);
 	m.stopPump();
+	*/
 
 
 	while (1)
 	{
-		/*
+		
 		moist0 = m.getMoist(0);
 		moist1 = m.getMoist(1);
 
-		cout << moist0  << " | " << moist1 << endl; 
+		cout << "AIN0: " << moist0  << " | AIN1: " << moist1 << endl; 
 
 		sleep(DELAY);
-		*/
+		
 
 		/*
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
