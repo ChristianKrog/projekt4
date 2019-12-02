@@ -322,10 +322,14 @@ bool Moist::rainwaterLevel()
 		cout << "There is water in Rainwater Tank! :-)" << endl;
 		return true; 
 	}
-	else 
+	else if(atoi(BUF) == 0)
 	{
 		cout << "No water in Rainwater Tank! :-(" << endl;
 		return false;
+	}
+	else 
+	{
+		exit(1);
 	}
 }
 
