@@ -188,7 +188,6 @@ int Moist::getMoist(int sensorID)
 	resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
 	resultMoist |= (data[2] & 0xff);
 
-	/*
 	////////////////CALIBRATION/////////////
 	if(sensorID == 0)
 	{
@@ -202,8 +201,6 @@ int Moist::getMoist(int sensorID)
 	}
 
 	////////////////CALIBRATION/////////////
-	*/
-	return resultMoist;
 }
 
 void Moist::startPump()
