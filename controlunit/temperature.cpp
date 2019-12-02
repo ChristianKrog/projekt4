@@ -135,16 +135,16 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	float b1Temp = 1;
 
 	int temp = getTemp();				//Gets temperature and saves it in temp
-	//cout << temp << endl;
+	cout << temp << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
-	
+	/*
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
 	{
 		startFan();
 		sleep(1);
 		stopFan();
-	}
+	}*/
 	
 	controlsignalTemp = a0Temp * errorTemp + (a1Temp) * errorPriorTemp + controlsignalPriorTemp * b1Temp;	//Current controlsignal calcuation, typecasting is used to round floats correctly
 	
