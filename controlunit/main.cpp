@@ -24,8 +24,30 @@ int main()
 
 	while (1)
 	{
-
-		cout << t.readI2C(0x48) << endl;
+		t.sendI2C(PSOC_I2C_ADDRESS, 1, 10);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 1, 50);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 1, 100);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 2, 10);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 2, 50);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 2, 100);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 3, 10);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 3, 50);
+		sleep(1);
+		t.sendI2C(PSOC_I2C_ADDRESS, 3, 100);
+		sleep(1);
+		cout << "Starting over in 10 seconds" << endl;
+		sleep(10);
+		/*
+		cout << "Temperatur: "<< t.readI2C(0x48) << endl;
+		sleep(1);
+		*/
 
 		/*
 		moist0 = m.getMoist(0);

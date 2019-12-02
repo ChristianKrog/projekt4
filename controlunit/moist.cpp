@@ -154,7 +154,7 @@ int Moist::getMoist(int sensorID)
 	}
 	else
 	{
-		perror("Sensor does not exist");
+		cout << "Sensor does not exist. Use 0 or 1" << endl;
 		exit(1);
 	}
 
@@ -162,7 +162,7 @@ int Moist::getMoist(int sensorID)
 	struct spi_ioc_transfer spi[length];
 	memset(&spi, 0, sizeof(spi));
 	int i = 0;
-	int retVal = -1;
+	int retVal;
 
 	// one spi transfer for each byte
 
@@ -179,24 +179,25 @@ int Moist::getMoist(int sensorID)
 
 	retVal = ioctl(Controlunit::spifd_, SPI_IOC_MESSAGE(length), &spi);
 
-	if (retVal < 0)
+	if (retVal == -1)
 	{
-		perror("Problem transmitting spi data..ioctl");
-		exit(1);
+		cout << "Error with SPI communication. " << strerror(errno) << endl;
 	}
-
-	resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
-	resultMoist |= (data[2] & 0xff);
+	else 
+	{
+		resultMoist = (data[1] << 8) & 0b111100000000; //merge data[1] & data[2] to get result
+		resultMoist |= (data[2] & 0xFF);
+	}
 
 	////////////////CALIBRATION/////////////
 	if(sensorID == 0)
 	{
-		moistCal = (resultMoist - 1667.7)/(-6.549);
+		moistCal = (resultMoist - 1667.7)/(-6.549); //calculation to moist percentage sensor0 
 		return (int)moistCal;
 	}
 	else
 	{
-		moistCal = (resultMoist - 1772.2)/(-7.518);
+		moistCal = (resultMoist - 1772.2)/(-7.518); //calculation to moist percentage sensor1 
 		return (int)moistCal;
 	}
 

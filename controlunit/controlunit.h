@@ -22,13 +22,14 @@ public:
 	Controlunit();
 	virtual ~Controlunit();
 	void sendI2C(unsigned char address, unsigned char choosePWM, unsigned char dutycycle);
-	int readI2C(unsigned char address);
+
 
 protected: 
 	int spifd_;
 	int i2cfd_;
 	void initSPI();
 	void killSPI();
+	int readI2C(unsigned char address);
 	
 	
 
