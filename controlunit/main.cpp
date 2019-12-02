@@ -24,8 +24,6 @@ int main()
 
 	while (1)
 	{
-		m.selectWaterSupply();
-		sleep(5);
 		/*
 		cout << "Temperatur: "<< t.readI2C(0x48) << endl;
 		sleep(1);
@@ -40,10 +38,10 @@ int main()
 		sleep(DELAY);
 		*/
 		
-		/*
+		
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
 		sleep(DELAY);
-		*/
+		
 
 		/*
 		moist0 = m.getMoist(0);
