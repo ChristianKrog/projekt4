@@ -23,6 +23,8 @@ int main()
 		moist0 = m.getMoist(0);
 		moist1 = m.getMoist(1);
 
+		cout << "S0: " << moist0 << " | S1: " << moist1 << endl;
+
 		if(moist0 < MOIST0_REF)
 		{	
 			m.selectWaterSupply();

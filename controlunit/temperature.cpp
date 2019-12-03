@@ -150,26 +150,22 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	}
 	
 	controlsignalTemp = ((a0Temp * errorTemp) + ((a1Temp) * errorPriorTemp) + (controlsignalPriorTemp * b1Temp));	//Current controlsignal calcuation, typecasting is used to round floats correctly
-	cout << "controlsignalTemp: " << controlsignalTemp << endl; 
 
 	errorPriorTemp = errorTemp;						//Setting the current temperature error as the prior temperature error
 	controlsignalPriorTemp = controlsignalTemp;		//Setting the current controlsignal as the prior controlsignal
 	
 	if (controlsignalTemp >= 1000)						//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
 	{
-		Controlunit::sendI2C(slaveAddress, 1, 100);	//Sends dutycycle 100% to PWM1
-		cout << "op1" << endl;				
+		Controlunit::sendI2C(slaveAddress, 1, 100);	//Sends dutycycle 100% to PWM1			
 	}
 	else if (controlsignalTemp <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
 	{
 		Controlunit::sendI2C(slaveAddress, 1, 0);	//Sends dutycycle 0% to PWM1
-		cout << "op2" << endl;					
 	}
 	else
 	{
 		int dutycycle = (int)controlsignalTemp/10;
 		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   //Sends controlsignal divided by 10 to PWM1		
-		cout << "op3" << endl;	
 	}
 }
 
