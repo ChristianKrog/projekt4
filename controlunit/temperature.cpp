@@ -139,7 +139,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	float b1Temp = 1;
 
 	int temp = getTemp();				//Gets temperature and saves it in temp
-	cout << temp << endl;
+	cout << "Current temperature: " << temp << "\370" << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
@@ -165,6 +165,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	else
 	{
 		int dutycycle = (int)controlsignalTemp/10;
+		cout << "Temperature dutycycle: " << dutycycle << endl;
 		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   //Sends controlsignal divided by 10 to PWM1		
 	}
 }

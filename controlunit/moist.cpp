@@ -270,7 +270,7 @@ void Moist::openValve(int valveID)
 	}
 	else
 	{
-		cout << "Valve" << valveID << " open" << endl;
+		//cout << "Valve" << valveID << " open" << endl;
 		close(fd);
 	}
 }
@@ -301,7 +301,7 @@ void Moist::closeValve(int valveID)
 	}
 	else
 	{
-		cout << "Valve" << valveID << " closed" << endl;
+		//cout << "Valve" << valveID << " closed" << endl;
 		close(fd);
 	}
 }
