@@ -13,7 +13,9 @@ int main()
 {	
 	Moist m;
 	Temperature t;
-	
+
+	int moist0 = 0, moist1 = 0;
+
 	while (1)
 	{
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
@@ -38,7 +40,7 @@ int main()
 }
 
 
-	//int moist0 = 0, moist1 = 0;
+	//
 	/*
 	m.startPump(); //Start Pump so we are ready to deliver some water! 
 	sleep(DELAY);
