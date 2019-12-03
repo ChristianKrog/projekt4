@@ -192,15 +192,7 @@ int Moist::getMoist(int sensorID)
 		resultMoist |= (data[2] & 0xFF);
 	}
 
-	if(sensorID == 0)
-	{
-		cout << "S" << sensorID << ": " << resultMoist;
-	}
-	else
-	{
-		cout << " | S" << sensorID << ": " << resultMoist << endl;
-	}
-	
+
 	////////////////CALIBRATION/////////////
 	if(sensorID == 0)
 	{

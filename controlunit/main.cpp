@@ -4,8 +4,8 @@
 
 #define PSOC_I2C_ADDRESS 0x08
 #define TEMP_REF 30
-#define MOIST0_REF 30
-#define MOIST1_REF 30
+#define MOIST0_REF 20
+#define MOIST1_REF 20
 #define DELAY 1
 #define MOIST_DELAY_US 100000 
 
