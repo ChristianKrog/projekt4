@@ -94,6 +94,10 @@ void Controlunit::killSPI()
 		cout << "Could not close SPI device: " << strerror(errno) << endl; 
 		exit(1);
 	}
+	else
+	{
+		cout << "SPI device is closed" << endl; 
+	}
 }
 
 void Controlunit::initI2C()
