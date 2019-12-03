@@ -204,7 +204,7 @@ int Moist::getMoist(int sensorID)
 	////////////////CALIBRATION/////////////
 	if(sensorID == 0)
 	{
-		moistCal = (resultMoist - 1667.7)/(-6.549); //calculation to moist percentage sensor0 
+		moistCal = (resultMoist - 1667.7)/(-6.459); //calculation to moist percentage sensor0 
 		return (int)moistCal;
 	}
 	else
