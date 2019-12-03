@@ -73,7 +73,7 @@ void Temperature::startFan()
 	}
 	else
 	{
-		cout << "Fan started" << endl;
+		//cout << "Fan started" << endl;
 		close(fd);
 	}
 }
@@ -93,7 +93,7 @@ void Temperature::stopFan()
 	}
 	else
 	{
-		cout << "Fan stopped" << endl;
+		//cout << "Fan stopped" << endl;
 		close(fd);
 	}
 }
@@ -139,7 +139,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	float b1Temp = 1;
 
 	int temp = getTemp();				//Gets temperature and saves it in temp
-	cout << temp << endl;
+	//cout << temp << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
@@ -157,17 +157,17 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	if (controlsignalTemp >= 1000)						//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
 	{
 		Controlunit::sendI2C(slaveAddress, 1, 100);	//Sends dutycycle 100% to PWM1			
-		cout << "100" << endl;
+		//cout << "100" << endl;
 	}
 	else if (controlsignalTemp <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
 	{
 		Controlunit::sendI2C(slaveAddress, 1, 0);		//Sends dutycycle 0% to PWM1
-		cout << "0" << endl;	
+		//cout << "0" << endl;	
 	}
 	else
 	{
 		int dutycycle = (int)controlsignalTemp/10;
-		cout << dutycycle << endl; //Sends controlsignal divided by 10 to PWM1
+		//cout << dutycycle << endl; //Sends controlsignal divided by 10 to PWM1
 		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   		
 	}
 }

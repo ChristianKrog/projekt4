@@ -24,6 +24,10 @@ void Controlunit::initSPI()
 		cout << "Could not open SPI device: " << strerror(errno) << endl;
 		exit(1);
 	}
+	else
+	{
+		cout << "SPI device is open" << endl;
+	}
 
 	fdVal = ioctl(spifd_, SPI_IOC_WR_MODE, &spiMode);
 	if (fdVal == -1)
@@ -31,11 +35,15 @@ void Controlunit::initSPI()
 		cout << "Could not set SPI mode: " << strerror(errno) << endl;
 		exit(1);
 	}
+	else 
+	{
+		cout << "SPI mode set to: " << spiMode << endl; 
+	}
 
 	fdVal = ioctl(spifd_, SPI_IOC_RD_MODE, &spiMode);
 	if (fdVal == -1)
 	{
-		cout << "Could not read SPI mode: " << strerror(errno) << endl;
+		cout << "Could not get SPI mode: " << strerror(errno) << endl;
 		exit(1);
 	}
 
@@ -45,11 +53,15 @@ void Controlunit::initSPI()
 		cout << "Could not set SPI bits per word: " << strerror(errno) << endl;
 		exit(1);
 	}
+	else
+	{
+		cout << "SPI bits per word set to: " << bitsPerWord << endl;
+	}
 
 	fdVal = ioctl(spifd_, SPI_IOC_RD_BITS_PER_WORD, &bitsPerWord);
 	if (fdVal == -1)
 	{
-		cout << "Could not read SPI bits per word " << strerror(errno) << endl;
+		cout << "Could not get SPI bits per word " << strerror(errno) << endl;
 		exit(1);
 	}
 
@@ -59,11 +71,15 @@ void Controlunit::initSPI()
 		cout << "Could not set SPI speed: " << strerror(errno) << endl;
 		exit(1);
 	}
+	else
+	{
+		cout << "SPI speed set to: " << speed << " Hz" << endl; 
+	}
 
 	fdVal = ioctl(spifd_, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
 	if (fdVal == -1)
 	{
-		cout << "Could not read SPI speed: " << strerror(errno) << endl;
+		cout << "Could not get SPI speed: " << strerror(errno) << endl;
 		exit(1);
 	}
 }

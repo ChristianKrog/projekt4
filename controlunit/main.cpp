@@ -11,7 +11,7 @@
 
 int main()
 {	
-	//Moist m;
+	Moist m;
 	Temperature t;
 
 	//int moist0 = 0, moist1 = 0;
@@ -20,10 +20,10 @@ int main()
 
 	while (1)
 	{
+		/*
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
 		sleep(DELAY);
 		
-		/*
 		moist0 = m.getMoist(0);
 		moist1 = m.getMoist(1);
 
