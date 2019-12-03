@@ -3,7 +3,7 @@
 #include "moist.h"
 
 #define PSOC_I2C_ADDRESS 0x08
-#define TEMP_REF 27
+#define TEMP_REF 30
 #define MOIST0_REF 30
 #define MOIST1_REF 30
 #define DELAY 1
@@ -16,6 +16,8 @@ int main()
 
 	int moist0 = 0, moist1 = 0;
 
+	m.startPump();
+
 	while (1)
 	{
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
@@ -24,6 +26,8 @@ int main()
 		moist1 = m.getMoist(1);
 
 		cout << "S0: " << moist0 << " | S1: " << moist1 << endl;
+
+		
 
 		if(moist0 < MOIST0_REF)
 		{	
