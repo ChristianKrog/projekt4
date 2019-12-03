@@ -1,7 +1,5 @@
 #include "moist.h"
 
-
-
 #include <cstring>
 #define NUM_OF_GPIOS 4 
 int fd, fdVal;
@@ -23,7 +21,7 @@ char pathVal23[] = "/sys/class/gpio/gpio23/value"; //Waterlevelsensor
 
 Moist::Moist()
 {
-	initSPI();
+	Controlunit::initSPI();
 
 	for (int i = 0; i < NUM_OF_GPIOS; i++)
 	{

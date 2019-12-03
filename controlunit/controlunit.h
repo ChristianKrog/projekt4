@@ -22,7 +22,6 @@ public:
 	virtual ~Controlunit();
 	void sendI2C(unsigned char address, unsigned char choosePWM, unsigned char dutycycle);
 
-
 protected: 
 	int spifd_;
 	int i2cfd_;
