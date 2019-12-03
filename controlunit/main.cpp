@@ -11,13 +11,28 @@
 
 int main()
 {	
-	//Moist m;
+	Moist m;
 	Temperature t;
 	
 	while (1)
 	{
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
 		sleep(DELAY);
+
+		if(moist0 < MOIST0_REF)
+		{	
+			m.selectWaterSupply();
+			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 2 , 100);
+			usleep(MOIST_DELAY_US);
+			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 2 , 0);
+		}
+		if(moist1 < MOIST1_REF)
+		{
+			m.selectWaterSupply();
+			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 3 , 100);
+			usleep(MOIST_DELAY_US);
+			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 3 , 0);
+		}
 	}
 	return 0;
 }

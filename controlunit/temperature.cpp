@@ -104,7 +104,6 @@ int Temperature::getTemp()
 	unsigned char address = 0x4C;  ///use address: 0x4C //fhat address: 0x48  
 	temp = Controlunit::readI2C(address);
 
-	/*
 	/////////////CALIBRATION//////////////
 	if(temp >= 14 && temp <= 16)
 	{
@@ -130,11 +129,7 @@ int Temperature::getTemp()
 	else
 	{
 		return temp; //return temp without calibration
-	}
-	*/
-
-	return temp;
-	
+	}	
 }
 
 void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Recives the desired/reference temperature and sends the correct duty cycle for the heat PWM on I2C slaveAddress
@@ -147,13 +142,12 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	cout << temp << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
-	/*
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
 	{
 		startFan();
 		sleep(1);
 		stopFan();
-	}*/
+	}
 	
 	controlsignalTemp = ((a0Temp * errorTemp) + ((a1Temp) * errorPriorTemp) + (controlsignalPriorTemp * b1Temp));	//Current controlsignal calcuation, typecasting is used to round floats correctly
 	cout << "controlsignalTemp: " << controlsignalTemp << endl; 
