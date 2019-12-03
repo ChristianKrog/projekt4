@@ -1,4 +1,7 @@
 #include "moist.h"
+
+
+
 #include <cstring>
 #define NUM_OF_GPIOS 4 
 int fd, fdVal;
@@ -189,6 +192,15 @@ int Moist::getMoist(int sensorID)
 		resultMoist |= (data[2] & 0xFF);
 	}
 
+	if(sensorID == 0)
+	{
+		cout << "S" << sensorID << ": " << resultMoist;
+	}
+	else
+	{
+		cout << " | S" << sensorID << ": " << resultMoist << endl;
+	}
+	
 	////////////////CALIBRATION/////////////
 	if(sensorID == 0)
 	{
