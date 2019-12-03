@@ -157,16 +157,18 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	if (controlsignalTemp >= 1000)						//Sets the duty cycle at 100% if current controlsignal is equal to or greater than 1000
 	{
 		Controlunit::sendI2C(slaveAddress, 1, 100);	//Sends dutycycle 100% to PWM1			
+		cout << "Temperature dutycycle: " << "100" << endl;
 	}
 	else if (controlsignalTemp <= 0)					//Sets the duty cycle at 0% if current controlsignal is equal to or lower than 0
 	{
-		Controlunit::sendI2C(slaveAddress, 1, 0);	//Sends dutycycle 0% to PWM1
+		Controlunit::sendI2C(slaveAddress, 1, 0);		//Sends dutycycle 0% to PWM1
+		cout << "Temperature dutycycle: " << "0" << endl;	
 	}
 	else
 	{
 		int dutycycle = (int)controlsignalTemp/10;
-		cout << "Temperature dutycycle: " << dutycycle << endl;
-		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   //Sends controlsignal divided by 10 to PWM1		
+		cout << "Temperature dutycycle: " << dutycycle << endl; //Sends controlsignal divided by 10 to PWM1
+		Controlunit::sendI2C(slaveAddress, 1, dutycycle);   		
 	}
 }
 

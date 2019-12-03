@@ -1,5 +1,4 @@
 #pragma once
-
 #ifndef CONTROLUNIT_H
 #define CONTROLUNIT_H
 class Moist;
@@ -31,8 +30,6 @@ protected:
 	void killSPI();
 	int readI2C(unsigned char address);
 	
-	
-
 private:
 	void initI2C();
 	void killI2C();

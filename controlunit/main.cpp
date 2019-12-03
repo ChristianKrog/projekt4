@@ -11,17 +11,19 @@
 
 int main()
 {	
-	Moist m;
+	//Moist m;
 	Temperature t;
 
-	int moist0 = 0, moist1 = 0;
+	//int moist0 = 0, moist1 = 0;
 
-	m.startPump();
+	//m.startPump();
 
 	while (1)
 	{
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
+		sleep(DELAY);
 		
+		/*
 		moist0 = m.getMoist(0);
 		moist1 = m.getMoist(1);
 
@@ -43,8 +45,8 @@ int main()
 			usleep(MOIST_DELAY_US);
 			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 3 , 0);
 		}
-
-		sleep(DELAY);
+		*/
+		
 	}
 	return 0;
 }
