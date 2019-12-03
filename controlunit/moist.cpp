@@ -129,7 +129,7 @@ Moist::~Moist()
 		}
 		else
 		{
-			cout << "Bytes written to export : " << fdVal << endl;
+			cout << "GPIO" << exportBuffer << " is unexported" << endl;
 			close(fd);
 		}
 	}
@@ -221,7 +221,7 @@ void Moist::startPump()
 	}
 	else
 	{
-		cout << "Pump started" << endl;
+		//cout << "Pump started" << endl;
 		close(fd);
 	}
 }
@@ -239,7 +239,7 @@ void Moist::stopPump()
 	}
 	else
 	{
-		cout << "Pump stopped" << endl;
+		//cout << "Pump stopped" << endl;
 		close(fd);
 	}
 }

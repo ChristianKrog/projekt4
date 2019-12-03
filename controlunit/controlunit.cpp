@@ -102,8 +102,12 @@ void Controlunit::initI2C()
 
 	if (i2cfd_ == -1) 
 	{
-		cout << "Filedirectory error: " << strerror(errno) << endl;
+		cout << "Could not open I2C device: " << strerror(errno) << endl;
 		exit(1);
+	}
+	else 
+	{
+		cout << "I2C device opened" << endl;
 	}
 }
 
@@ -116,6 +120,10 @@ void Controlunit::killI2C()
 	{
 		cout << "Could not close I2C device: " << strerror(errno) << endl;
 		exit(1);		
+	}
+	else 
+	{
+		cout << "I2C device closed" << endl;
 	}
 }
 

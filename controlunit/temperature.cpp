@@ -53,7 +53,7 @@ Temperature::~Temperature()
 	}
 	else
 	{
-		cout << "Bytes written to export : " << fdVal << endl;
+		cout << "GPIO24 is unexported" << endl;
 		close(fd);
 	}
 
