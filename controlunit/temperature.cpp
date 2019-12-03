@@ -139,7 +139,7 @@ void Temperature::regulateTemperature(unsigned char slaveAddress, int ref)  //Re
 	float b1Temp = 1;
 
 	int temp = getTemp();				//Gets temperature and saves it in temp
-	cout << "Current temperature: " << temp << "\370" << endl;
+	cout << "Current temperature: " << temp << endl;
 	errorTemp = ref - temp;				//Error is set to the difference between the reference and the current temperature
 
 	if(errorTemp < 0)					//If error is negative the fan will turn on for a second.
