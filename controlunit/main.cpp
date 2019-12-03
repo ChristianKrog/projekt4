@@ -4,8 +4,8 @@
 
 #define PSOC_I2C_ADDRESS 0x08
 #define TEMP_REF 27
-#define MOIST0_REF 10
-#define MOIST1_REF 10
+#define MOIST0_REF 30
+#define MOIST1_REF 30
 #define DELAY 1
 #define MOIST_DELAY_US 100000 
 
@@ -19,7 +19,9 @@ int main()
 	while (1)
 	{
 		t.regulateTemperature(PSOC_I2C_ADDRESS, TEMP_REF);
-		sleep(DELAY);
+		
+		moist0 = m.getMoist(0);
+		moist1 = m.getMoist(1);
 
 		if(moist0 < MOIST0_REF)
 		{	
@@ -35,6 +37,8 @@ int main()
 			usleep(MOIST_DELAY_US);
 			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 3 , 0);
 		}
+
+		sleep(DELAY);
 	}
 	return 0;
 }
