@@ -71,7 +71,7 @@ Moist::Moist()
 			}
 			else
 			{
-				cout < "GPIO" << exportBuffer << " is set to output" << endl;
+				cout << "GPIO" << exportBuffer << " is set to output" << endl;
 				close(fd);
 			}
 		}
