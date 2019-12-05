@@ -55,7 +55,7 @@ void Controlunit::initSPI()
 	}
 	else
 	{
-		cout << "SPI bits per word set to: " << bitsPerWord << endl;
+		cout << "SPI bits per word set to: " << static_cast<unsigned>bitsPerWord << endl;
 	}
 
 	fdVal = ioctl(spifd_, SPI_IOC_RD_BITS_PER_WORD, &bitsPerWord);
