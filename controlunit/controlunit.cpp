@@ -37,7 +37,7 @@ void Controlunit::initSPI()
 	}
 	else 
 	{
-		cout << "SPI mode set to: " << spiMode << endl; 
+		cout << "SPI mode set to: " << static_cast<unsigned>(spiMode) << endl; 
 	}
 
 	fdVal = ioctl(spifd_, SPI_IOC_RD_MODE, &spiMode);
