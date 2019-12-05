@@ -98,7 +98,7 @@ void Temperature::stopFan()
 	}
 }
 
-int Temperature::getTemp()
+int Temperature::getTemp() 
 {
 	int temp;
 	unsigned char address = 0x4C;  ///use address: 0x4C //fhat address: 0x48  

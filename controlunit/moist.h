@@ -10,9 +10,9 @@ public:
 	~Moist();
 	void startPump();
 	void stopPump();
-	void regulateMoisture(unsigned char slaveAddress, int sensorID, int ref);
 	int getMoist(int sensorID);
 	void selectWaterSupply();
+	void regulateMoisture(unsigned char slaveAddress, int sensorID, int ref);
 
 private: 
 	bool rainwaterLevel();

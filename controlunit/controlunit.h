@@ -32,6 +32,5 @@ protected:
 private:
 	void initI2C();
 	void killI2C();
-
 };
 #endif

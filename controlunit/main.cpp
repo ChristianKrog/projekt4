@@ -14,6 +14,9 @@ int main()
 	Moist m;
 	Temperature t;
 
+	m.~Moist();
+	t.~Temperature();
+
 	//int moist0 = 0, moist1 = 0;
 
 	//m.startPump();
@@ -46,9 +49,10 @@ int main()
 			m.Controlunit::sendI2C(PSOC_I2C_ADDRESS, 3 , 0);
 		}
 		*/
-		
+				
 	}
 	return 0;
+
 }
 
 
