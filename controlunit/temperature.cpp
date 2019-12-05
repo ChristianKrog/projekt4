@@ -22,7 +22,7 @@ Temperature::Temperature()
 	}
 	else
 	{
-		cout << "Bytes written to export GPIO" << exportBuffer << ": " << fdVal << endl;
+		cout << "GPIO" << exportBuffer << " successfully exported" << endl;
 		close(fd);
 	}
 	//Writing to direction. Setting up direction for port to OUTPUT. 
@@ -35,7 +35,7 @@ Temperature::Temperature()
 	}
 	else
 	{
-		cout << "Bytes written to " << pathDir << ": " << fdVal << endl;
+		cout < "GPIO" << exportBuffer << " is set to output" << endl;
 		close(fd);
 	}
 }
